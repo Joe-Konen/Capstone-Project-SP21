@@ -7,5 +7,46 @@ body{
 }
 
 .bg-dark{
-    background-color: blue!important;
+    background-color:rgb(61, 38, 61)!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Login Page*/
+
+.login{
+    text-align: left;
+    padding-top: 150px;
+}
+
+.register{
+    text-align: center;
+    padding-top: 150px;
+}
+
+.help{
+    padding: 10px;
+    
+}
+
+.work{
+    padding: 10px;
+}
+
+input{
+    display: center;
+    margin: 0 auto;
 }
