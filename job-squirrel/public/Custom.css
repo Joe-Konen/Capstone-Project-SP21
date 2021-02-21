@@ -1,40 +1,29 @@
 body{
-    color: black;
+    color: white;
     font-size: large;
-    font-weight: 200;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: orangered;
+    font-weight: 400;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: gray;
 }
 
 .bg-dark{
-    background-color:rgb(61, 38, 61)!important;
+    background-color:orangered!important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 /*Login Page*/
 
-.login{
-    text-align: left;
-    padding-top: 150px;
+.LogPage{
+    margin-top: 140px;
+    text-align: center!important;
+    padding-top: 500px;
 }
 
 .register{
     text-align: center;
     padding-top: 150px;
+    color: violet;
 }
 
 .help{
@@ -50,3 +39,6 @@ input{
     display: center;
     margin: 0 auto;
 }
+
+/* end login page */
+

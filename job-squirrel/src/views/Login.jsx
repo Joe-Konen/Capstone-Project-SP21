@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-//import "./Login.css";
+import './stylesheets/Style.css';
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
     return (
 
-        <div className="Login">
+        <body classname="LogPage">
+        <div className="LogPageDiv">
             <div className="register">
                 <h1>Need to register?</h1>
                 <button className="help">I'm looking for help</button>
@@ -31,6 +31,7 @@ function Login() {
                 <button className="loginButton">Login</button>
             </div>
         </div>
+        </body>
     );
 }
 
