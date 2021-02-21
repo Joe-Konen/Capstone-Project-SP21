@@ -1,9 +1,20 @@
 import React, {useState} from "react";
-//import "./Login.css";
+import Axios from "axios";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const[loginStatus, setLoginStatus] = useState("");
+
+  const login = () => {
+      Axios.post("http://localhost:3001/loginUser",{
+          username: username,
+          password: password,
+      }).then((response) => {
+          console.log(response);
+      });
+  };
 
     return (
 
@@ -28,8 +39,9 @@ function Login() {
                     setPassword(e.target.value);
                 }}
                 />
-                <button className="loginButton">Login</button>
+                <button onClick={login} className="loginButton">Login</button>
             </div>
+            <h1>{loginStatus}</h1>
         </div>
     );
 }
