@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Logo from './partials/Logo';
 import Login from '../../views/Login';
 
+
 const propTypes = {
   navPosition: PropTypes.string,
   hideNav: PropTypes.bool,
@@ -121,7 +122,7 @@ const Header = ({
                       className="list-reset header-nav-right"
                     >
                       <li>
-                        <Link to="Login" className="button button-primary button-wide-mobile button-sm">Log In</Link>
+                        <Link to="Login" className="button button-primary button-wide-mobile button-sm" >Log In</Link>
                       </li>
                     </ul>}
                 </div>
