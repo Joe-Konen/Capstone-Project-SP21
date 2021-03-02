@@ -20,11 +20,14 @@ function Login() {
           setUsername(response.data.username);
           console.log(username)
           console.log(response.data)
+          const user = localStorage.setItem('username', username)
           if(response.data == "You are logged in as a student"){
             history.push("/HomeStudent");
-            
+            console.log(user)
+
         }else if(response.data == "You are logged in as an employer"){
             history.push("/HomeEmployer");
+            
         }else{
             console.log("Login incorrect, try again.");
             setError("Login incorrect, try again.");
