@@ -1,21 +1,40 @@
 import React, {useState} from "react";
-//import "../App.css";
+import Axios from "axios";
+import "./stylesheets/Style.css";
+import {useHistory} from "react-router-dom";
 
-function RegisterStudent() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [phoneNum, setPhone] = useState("");
-  const [fName, setFirstName] = useState("");
-  const [lName, setLastName] = useState("");
+function RegisterEmployer() {
+  const [usernameReg, setUsername] = useState("");
+  const [passwordReg, setPassword] = useState("");
+  const [addressReg, setAddress] = useState("");
+  const [phoneNumReg, setPhone] = useState("");
+  const [fNameReg, setFirstName] = useState("");
+  const [lNameReg, setLastName] = useState("");
+  const [emailReg, setEmail] = useState("");
 
+  const history = useHistory();
+
+  const employerRegister = () => {
+      Axios.post("http://localhost:3001/employerRegister", {
+        username: usernameReg,
+        password: passwordReg,
+        address: addressReg,
+        phone: phoneNumReg,
+        fName: fNameReg,
+        lName: lNameReg,
+        email: emailReg,
+      }).then((response) => {
+        console.log(response);
+        if(response.data == "registered"){
+            history.push("/HomeEmployer");
+        };
+      });
+    }
     return (
-
         <div className="Login">
             <div className="Register">
                 <h1>Employer Registration</h1>
             </div>
-            <form method="post">
                 <div class="Register">
                     <label for="fName">First Name: </label>
                     <input type="text"
@@ -53,6 +72,15 @@ function RegisterStudent() {
                     }}
                     required
                     />
+                    <label for="email">Email: </label>
+                    <input type="text"
+                    placeholder="Email"
+                    id = "email"
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                    }}
+                    required
+                    />
                     <label for="address">Address: </label>
                     <input type="text"
                     placeholder="address"
@@ -72,12 +100,10 @@ function RegisterStudent() {
                     required
                     />
                     <button className="backButton">Cancel</button>
-                    <input type="submit" value ="Register" class="Submit"></input>
+                    <button onClick={employerRegister}>Register</button>
                 </div>
-            </form>
         </div>
     );
 }
 
-
-export default RegisterStudent;
+export default RegisterEmployer;
