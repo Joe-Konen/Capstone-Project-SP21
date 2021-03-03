@@ -20,6 +20,9 @@ app.use(cors({
     credentials: true
 }));
 
+//var logged = username;
+//console.log(logged);
+
 app.use(session({
     key: "userID",
     secret: "jobsquirrel",
@@ -84,5 +87,6 @@ app.post("/Login", (req, res) => {
         })   
     });
 })
+
 
 app.listen(3001);
