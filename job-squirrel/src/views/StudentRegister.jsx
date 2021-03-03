@@ -15,6 +15,11 @@ function RegisterStudent() {
 
   const history = useHistory();
 
+  const routeChange = () => {
+      let path = 'Login';
+      history.push(path);
+  }
+
   const studentRegister = () => {
       Axios.post("http://localhost:3001/studentRegister", {
         username: usernameReg,
@@ -110,7 +115,7 @@ function RegisterStudent() {
                         }}
                         required
                         />
-                        <button className="backButton">Cancel</button>
+                        <button className="backButton" onClick={routeChange}>Cancel</button>
                         <button onClick={studentRegister}>Register</button>
                 </div>
         </div>

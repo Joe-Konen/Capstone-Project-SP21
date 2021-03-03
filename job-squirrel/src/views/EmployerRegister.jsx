@@ -14,6 +14,11 @@ function RegisterEmployer() {
 
   const history = useHistory();
 
+  const routeChange = () => {
+    let path = 'Login';
+    history.push(path);
+    }
+
   const employerRegister = () => {
       Axios.post("http://localhost:3001/employerRegister", {
         username: usernameReg,
@@ -99,7 +104,7 @@ function RegisterEmployer() {
                     }}
                     required
                     />
-                    <button className="backButton">Cancel</button>
+                    <button className="backButton" onClick={routeChange}>Cancel</button>
                     <button onClick={employerRegister}>Register</button>
                 </div>
         </div>
