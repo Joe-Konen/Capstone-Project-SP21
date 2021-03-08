@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, {Component, useState} from "react";
 import './stylesheets/Style.css';
+
+
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
     return (
 
-        <body classname="LogPage">
+        <body classname="LogPage" style={{display: "flex", justifyContent: "center"}}>
         <div className="LogPageDiv">
             <div className="register">
                 <h1>Need to register?</h1>
