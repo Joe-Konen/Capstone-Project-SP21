@@ -1,11 +1,34 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-const { nextTick } = require("process");
 const app = express();
 
+//const bcrypt = require('bcrypt');
+//const saltRounds = 10;
+
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const e = require("express");
+
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
+
+app.use(session({
+    key: "userID",
+    secret: "jobsquirrel",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60 * 60 * 24,
+    },
+}));
 
 const db = mysql.createPool({
     user: "JobsToDoS2021",
@@ -20,8 +43,7 @@ db.getConnection(function(err) {
     console.log("Connected!");
 });
 
-
-app.post("/loginUser", (req, res) => {
+app.post("/Login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -32,7 +54,13 @@ app.post("/loginUser", (req, res) => {
             [username, password],
             (err, result) => {
                 if(result.length > 0){
-                    res.send("You are logged in as a employer");
+                    req.session.user = result
+                    res.send("You are logged in as an employer");
+                    const emp = JSON.stringify({
+                        username,
+                        password,
+                    })
+                    console.log(emp);
                     return;
                 }
                 if(!err){
@@ -40,8 +68,16 @@ app.post("/loginUser", (req, res) => {
                     [username, password],
                     (err, result) => {
                         if(result.length > 0){
+                            req.session.user = result
                             res.send("You are logged in as a student");
+                            const stu = JSON.stringify({
+                                username,
+                                password,
+                            })
+                            console.log(stu)
                             return;
+                        }else{
+                            res.send("Login incorrect, try again.")
                         }
                     }
                 )}    
