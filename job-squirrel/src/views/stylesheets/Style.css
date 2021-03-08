@@ -2,3 +2,26 @@
     color: red!important;
     background-color: orange!important;
 }
+
+/*Registration Pages*/
+div.Register {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+    justify-content: center;
+  }
+  
+  div.Register label{
+     text-align:right;
+    }
+  
+  div.Register button{
+    width: 150px; 
+    margin: auto;
+  }
+
+  div.Register input.Submit {
+    width: 150px; 
+    margin: auto;
+  }
+/*End of Registration Pages*/
