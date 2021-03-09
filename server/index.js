@@ -95,7 +95,7 @@ app.post("/studentRegister", (req, res) => {
     var stuAge = req.body.age;
     const stuEmail = req.body.email;
 
-    age = parseInt(age);
+    stuAge = parseInt(stuAge);
 
     var values = [
         [stuFName, stuLName, school, stuAge, stuEmail, stuPassword, stuUsername]
