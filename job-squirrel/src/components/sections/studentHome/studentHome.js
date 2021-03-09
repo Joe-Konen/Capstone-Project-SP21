@@ -3,6 +3,9 @@ import classNames from 'classnames';
 import { SectionSplitProps } from '../../../utils/SectionProps';
 import SectionHeader from '../partials/SectionHeader';
 import Image from '../../elements/Image';
+import sJobBoard from '../../../views/SjobBoard.jsx';
+import ButtonGroup from '../../elements/ButtonGroup';
+import Button from '../../elements/Button';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -50,8 +53,8 @@ const FeaturesSplit = ({
   );
 
   const sectionHeader = {
-    title: 'Student Home!',
-    paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
+    title: 'Student Dashboard',
+    paragraph: 'This is the students dashboard. You can find all of the useful information here on how to use JobSquirrel as well as get to the different pages through the different tabs and buttons provided!'
   };
 
   return (
@@ -59,6 +62,23 @@ const FeaturesSplit = ({
       {...props}
       className={outerClasses}
     >
+
+      <div className="container">
+      <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="sJobBoard">
+                    Job Board
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="studentProfile">
+                    My Profile
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="SjobsToDo">
+                    My Jobs In Progress
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="FAQ">
+                    Feedback
+                    </Button>
+        </ButtonGroup>
+      </div>
       <div className="container">
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
@@ -67,14 +87,19 @@ const FeaturesSplit = ({
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  Get to Work!
                   </div>
                 <h3 className="mt-0 mb-12">
-                  Data-driven insights
+                  Job Board
                   </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Visit the job board tab at the top of the page to view current jobs in the area and pick the one that most interests you! You can choose any job you like, as long as you are qualified for it, but make sure you complete it!
                   </p>
+                  <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="sJobBoard">
+                    View the Board
+                    </Button>
+                  </ButtonGroup>
               </div>
               <div className={
                 classNames(
@@ -86,20 +111,22 @@ const FeaturesSplit = ({
                   src={require('../../../assets/images/features-split-image-01.png')}
                   alt="Features split 01"
                   width={528}
-                  height={396} />
+                  height={396} 
+                  onClick={sJobBoard}
+                  />
               </div>
             </div>
 
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  Earn some money!
                   </div>
                 <h3 className="mt-0 mb-12">
-                  Data-driven insights
+                  Complete Your Jobs!
                   </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  It is very important to complete jobs that you have signed up for. Not completing jobs can give you a bad reputation in the area for not being a reputable helper! Always complete jobs that you have signed up for or ask the employer if it would be ok to cancel or reschedule the job.
                   </p>
               </div>
               <div className={
@@ -119,13 +146,13 @@ const FeaturesSplit = ({
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  Feedback
                   </div>
                 <h3 className="mt-0 mb-12">
-                  Data-driven insights
+                  Your Reviews Are Important!
                   </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  After completing a job, make sure to leave a review for your employer based on your experience working with them. Be sure to be respectful and accurate as they can review you also. Feedback is important to providing the best possible experience here on JobSquirrel!
                   </p>
               </div>
               <div className={

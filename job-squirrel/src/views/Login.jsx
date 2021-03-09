@@ -43,11 +43,12 @@ function Login() {
 
     return (
 
-        <div className="Login">
+        <div className="container-xs">
         <div className="register">
             <h1>Need to register?</h1>
-            <button className="help">I'm looking for help</button>
-            <button className="work">I'm looking for work</button>
+            <button className="button button-primary button-wide-mobile">I'm looking for help</button>
+                -----           
+            <button className="button button-primary button-wide-mobile">I'm looking for work</button>
         </div>
         <div className="login">
             <form onSubmit={handleSubmit}>
@@ -56,18 +57,20 @@ function Login() {
             {(error != "") ? (<div className="error">{error}</div>) : ""}
             <input type="text"
             placeholder="username"
+            className="form-input"
             onChange={(e) => {
                 setUsername(e.target.value);
             }}
             />
             <input type="password"
             placeholder="password"
+            className="form-input"
             onChange={(e) => {
                 setPassword(e.target.value);
             }}
             />
             <button onClick={login} type="submit" 
-                    className="loginButton" >Login</button>
+                    className="button button-primary button-wide-mobile" >Login</button>
             </form>
         </div>
         

@@ -12,8 +12,15 @@ import Home from './views/Home';
 import Login from './views/Login';
 import HomeStudent from './views/HomeStudent';
 import HomeEmployer from './views/HomeEmployer';
+
 import StudentRegister from './views/StudentRegister';
 import EmployerRegister from './views/EmployerRegister';
+
+
+import Contact from './views/Contact';
+import About from './views/About';
+import FAQ from './views/FAQ';
+import studentProfile from './views/StudentProfile';
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -47,8 +54,14 @@ const App = () => {
           <AppRoute exact path="/login" component={Login} layout={LayoutDefault} />
           <AppRoute exact path="/HomeStudent" component={HomeStudent} layout={LayoutDefault} />
           <AppRoute exact path="/HomeEmployer" component={HomeEmployer} layout={LayoutDefault} />
-          <AppRoute exact path="/StudentRegister" component={StudentRegister} layout={LayoutDefault} />
+         <AppRoute exact path="/StudentRegister" component={StudentRegister} layout={LayoutDefault} />
           <AppRoute exact path="/EmployerRegister" component={EmployerRegister} layout={LayoutDefault} />
+
+          <AppRoute exact path="/Contact" component={Contact} layout={LayoutDefault} />
+          <AppRoute exact path="/About" component={About} layout={LayoutDefault} />
+          <AppRoute exact path="/FAQ" component={FAQ} layout={LayoutDefault} />
+          <AppRoute exact path="/studentProfile" component={studentProfile} layout={LayoutDefault} />
+
         </Switch>
       )} />
   );
