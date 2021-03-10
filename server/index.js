@@ -85,4 +85,14 @@ app.post("/Login", (req, res) => {
     });
 })
 
+app.get("/JobBoard", (req, res) => {
+
+    db.getConnection(function(err, connection){
+        db.query("SELECT * FROM Job WHERE status = 0", (err, result) => {
+            console.log(result);
+            res.send(result) 
+        })
+    })
+})
+
 app.listen(3001);
