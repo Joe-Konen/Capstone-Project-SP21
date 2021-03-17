@@ -28,9 +28,9 @@ function SjobBoard() {
     return (
         <div>
             <h1 style={{textAlign: 'center', padding: '25px'}}>Welcome to the Student Job Board</h1>
-            <div style={{paddingLeft: '15%'}}>
+            <div style={{paddingLeft: '15%', paddingBottom: '20px'}}>
                 <label>Search by job name: </label>
-                <input style={{paddingBottom: '10px', height: '25px'}}type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
+                <input style={{height: '25px'}} type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
             </div>
             <div>
                 <Table job={searchBar(job)}/>

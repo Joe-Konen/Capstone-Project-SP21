@@ -95,4 +95,11 @@ app.get("/JobBoard", (req, res) => {
     })
 })
 
+app.post("/JobBoard", (req, res) => {
+    db.query("INSERT INTO StudentToDoJobs", (err, result) => {
+        console.log(result)
+        res.send(result);
+    })
+})
+
 app.listen(3001);
