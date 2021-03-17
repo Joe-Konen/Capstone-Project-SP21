@@ -11,14 +11,14 @@ function RegisterEmployer() {
   const [fNameReg, setFirstName] = useState("");
   const [lNameReg, setLastName] = useState("");
   const [emailReg, setEmail] = useState("");
-
+  
   const history = useHistory();
-
+  
   const routeChange = () => {
     let path = 'Login';
     history.push(path);
     }
-
+  
   const employerRegister = () => {
       Axios.post("http://localhost:3001/employerRegister", {
         username: usernameReg,

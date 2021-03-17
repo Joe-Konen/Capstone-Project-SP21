@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useLocation, Switch } from 'react-router-dom';
 import AppRoute from './utils/AppRoute';
 import ScrollReveal from './utils/ScrollReveal';
@@ -14,6 +14,7 @@ import HomeStudent from './views/HomeStudent';
 import HomeEmployer from './views/HomeEmployer';
 import StudentRegister from './views/StudentRegister';
 import EmployerRegister from './views/EmployerRegister';
+import StudentProfile from './views/StudentProfile';
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -24,6 +25,8 @@ const trackPage = page => {
 };
 
 const App = () => {
+
+  const [user, setUser] = useState();
 
   const childRef = useRef();
   let location = useLocation();
@@ -49,6 +52,7 @@ const App = () => {
           <AppRoute exact path="/HomeEmployer" component={HomeEmployer} layout={LayoutDefault} />
           <AppRoute exact path="/StudentRegister" component={StudentRegister} layout={LayoutDefault} />
           <AppRoute exact path="/EmployerRegister" component={EmployerRegister} layout={LayoutDefault} />
+          <AppRoute exact path="/StudentProfile" component={StudentProfile} layout={LayoutDefault} />
         </Switch>
       )} />
   );

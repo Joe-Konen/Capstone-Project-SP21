@@ -38,10 +38,45 @@ const db = mysql.createPool({
     multipleStatements: true,
 });
 
+const loggedInUser = {
+    user: "",
+    pass: ""
+};
+
 db.getConnection(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
+
+app.get("/", (req,res) => {
+    loggedInUser.user = "";
+    loggedInUser.pass = "";
+    console.log("Cleared out user");
+})
+
+app.get("/getStudent", (req, res) => {
+    let username = loggedInUser.user;
+    let password = loggedInUser.pass;
+    let userInfo = [];
+    console.log([username, password]);
+    db.query(
+        "SELECT * FROM Student WHERE stu_username = ? AND stu_password = ?",
+        [username, password],
+        (err, result, fields) => {
+            if(err) throw err;
+            console.log(result);
+            userInfo.push(result[0].stu_username);
+            userInfo.push(result[0].stu_password);
+            userInfo.push(result[0].email);
+            userInfo.push(result[0].age);
+            userInfo.push(result[0].firstName);
+            userInfo.push(result[0].lastName);
+            userInfo.push(result[0].schoolName);
+            console.log(userInfo);
+            res.send(userInfo);
+        }
+    )
+})
 
 app.post("/Login", (req, res) => {
     const username = req.body.username;
@@ -60,6 +95,8 @@ app.post("/Login", (req, res) => {
                         username,
                         password,
                     })
+                    loggedInUser.user = username;
+                    loggedInUser.pass = password;
                     console.log(emp);
                     return;
                 }
@@ -74,6 +111,8 @@ app.post("/Login", (req, res) => {
                                 username,
                                 password,
                             })
+                            loggedInUser.user = username;
+                            loggedInUser.pass = password;
                             console.log(stu)
                             return;
                         }else{
