@@ -3,19 +3,25 @@ import Axios from "axios";
 import "./stylesheets/Style.css";
 import {useHistory} from "react-router-dom";
 
+var grabbedData = false;
+
 function StudentProfile () {
 
-const [username, setUsername] = useState("");
-const [password, setPassword] = useState("");
-const [fName, setFirstName] = useState("");
-const [lName, setLastName] = useState("");
-const [email, setEmail] = useState("");
-const [age, setAge] = useState("");
-const [school, setSchool] = useState("");
+const [usernameStu, setUsername] = useState("");
+const [passwordStu, setPassword] = useState("");
+const [fNameStu, setFirstName] = useState("");
+const [lNameStu, setLastName] = useState("");
+const [emailStu, setEmail] = useState("");
+const [ageStu, setAge] = useState("");
+const [schoolStu, setSchool] = useState("");
+
+const history = useHistory();
 
 const getData = () => {
-    Axios.get('http://localhost:3001/getStudent')
-     .then(function (res) {
+    if(!grabbedData){
+        grabbedData = true;
+        Axios.get('http://localhost:3001/getStudent')
+        .then(function (res) {
             const user = res.data;
             setUsername(user[0]);
             setPassword(user[1]);
@@ -24,7 +30,30 @@ const getData = () => {
             setFirstName(user[4]);
             setLastName(user[5]);
             setSchool(user[6]);
-     })
+        })
+    }
+}
+
+    const routeChange = () => {
+        let path = 'HomeStudent';
+        history.push(path);
+    }
+
+    const employerRegister = () => {
+        Axios.post("http://localhost:3001/editStudent", {
+            username: usernameStu,
+            password: passwordStu,
+            school: schoolStu,
+            fName: fNameStu,
+            lName: lNameStu,
+            email: emailStu,
+            age: ageStu,
+        }).then((response) => {
+            console.log(response);
+            if(response.data == "edited"){
+                history.push("/HomeStudent");
+            };
+        });
     }
 
     getData();
@@ -35,48 +64,74 @@ const getData = () => {
             <h1>Edit Profile</h1>
         </div>
         <div class="Register">
+            <p>Here, you can make any desired edits to your profile. Just change what you like and click "Confirm Edits"</p>
+        </div>
+        <div class="Register">
             <label for="fName">First Name: </label>
                 <input type="text"
                 placeholder="First Name"
                 id = "fName"
-                defaultValue = {fName}
+                defaultValue = {fNameStu}
+                onChange={(e) => {
+                    setFirstName(e.target.value);
+                }}
             />
             <label for="lName">Last Name: </label>
                 <input type="text"
                 placeholder="Last Name"
                 id = "lName"
-                defaultValue = {lName}
+                defaultValue = {lNameStu}
+                onChange={(e) => {
+                    setLastName(e.target.value);
+                }}
             />
             <label for="email">Email: </label>
                 <input type="text"
                 placeholder="Email"
                 id = "email"
-                defaultValue = {email}
+                defaultValue = {emailStu}
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                }}
             />
             <label for="username">Username: </label>
                 <input type="text"
                 placeholder="Username"
                 id = "username"
-                defaultValue = {username}
+                defaultValue = {usernameStu}
+                onChange={(e) => {
+                    setUsername(e.target.value);
+                }}
             />
             <label for="password">Password: </label>
                 <input type="password"
                 placeholder="Password"
                 id = "password"
-                defaultValue = {password}
+                defaultValue = {passwordStu}
+                onChange={(e) => {
+                    setPassword(e.target.value);
+                }}
             />
             <label for="school">School: </label>
                 <input type="text"
                 placeholder="School"
                 id = "school"
-                defaultValue = {school}
+                defaultValue = {schoolStu}
+                onChange={(e) => {
+                    setSchool(e.target.value);
+                }}
             />
             <label for="age">Age: </label>
                 <input type="text"
                 placeholder="Age"
                 id = "age"
-                defaultValue = {age}
+                defaultValue = {ageStu}
+                onChange={(e) => {
+                    setAge(e.target.value);
+                }}
             />
+            <button className="backButton" onClick={routeChange}>Cancel</button>
+            <button onClick={employerRegister}>Confirm Edits</button>
         </div>
     </div>
     );

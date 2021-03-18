@@ -58,13 +58,12 @@ app.get("/getStudent", (req, res) => {
     let username = loggedInUser.user;
     let password = loggedInUser.pass;
     let userInfo = [];
-    console.log([username, password]);
     db.query(
         "SELECT * FROM Student WHERE stu_username = ? AND stu_password = ?",
         [username, password],
         (err, result, fields) => {
             if(err) throw err;
-            console.log(result);
+            console.log("grabbing user");
             userInfo.push(result[0].stu_username);
             userInfo.push(result[0].stu_password);
             userInfo.push(result[0].email);
@@ -72,10 +71,46 @@ app.get("/getStudent", (req, res) => {
             userInfo.push(result[0].firstName);
             userInfo.push(result[0].lastName);
             userInfo.push(result[0].schoolName);
-            console.log(userInfo);
             res.send(userInfo);
         }
     )
+})
+
+app.post("/editStudent", (req,res) => {
+    const stuUsername = req.body.username;
+    const stuPassword = req.body.password;
+    const stuFName = req.body.fName;
+    const stuLName = req.body.lName;
+    const school = req.body.school;
+    var stuAge = req.body.age;
+    const stuEmail = req.body.email;
+
+    stuAge = parseInt(stuAge);
+
+    var values = [
+        stuFName, stuLName, school, stuAge, stuEmail, stuPassword, stuUsername, loggedInUser.user, loggedInUser.pass
+    ];
+
+    console.log(values);
+
+    db.query(
+        "UPDATE Student SET " +
+        "firstName = ?, " +
+        "lastName = ?, " +
+        "schoolName = ?, " +
+        "age = ?, " +
+        "email = ?, " +
+        "stu_password = ?, " +
+        "stu_username = ? " +
+        "WHERE stu_username = ? AND stu_password = ?",
+        values,
+        function(err, rows, fields){
+            if (err) throw err;
+            loggedInUser.user = stuUsername;
+            loggedInUser.pass = stuPassword;
+        });
+    
+        res.send("edited")
 })
 
 app.post("/Login", (req, res) => {
