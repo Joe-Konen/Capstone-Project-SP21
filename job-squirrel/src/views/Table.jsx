@@ -1,11 +1,30 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import moment from 'moment'
 
 function Table({ job }) {
-
+    const [chooseJob, setChooseJob] = useState([]);
     const [isChecked, setCheckbox] = useState(false);
     const [checkedJobs, setCheckedJobs] = useState([])
 
+
+    useEffect(() => {
+        checkedJobs.map((check) => {
+            
+            for(var i=0; i<job.length; i++){
+
+                if(job[i].jobID == check){
+                    console.log(job[i])
+                    chooseJob.push(job[i])
+                    setChooseJob(arr => [...arr])
+                    console.log(chooseJob)
+                    
+                }
+            }
+        });
+    
+    }, [isChecked])
+
+    
     const handleChange = (e, job) => {
         setCheckbox({
           ...isChecked,
@@ -17,7 +36,6 @@ function Table({ job }) {
         if(e.target.checked){
             var checkedJobs = e.target.value
             setCheckedJobs(setCheckedJobs => [setCheckedJobs, checkedJobs])
-            console.log("checked: ", checkedJobs)
 
         }else{
             index = checkedJobs.indexOf(e.target.value)
@@ -25,19 +43,17 @@ function Table({ job }) {
                 checkedJobs.splice(index, 1)
                 setCheckedJobs(checkedJobs)
 
-            }
-            
+            } 
         }
       };
-    
 
+    
     return (
-        <div className="viewJobs">
-            <form >
+        <div>
             <table style={{width: '70%', margin: 'auto'}}>
                 <thead style={{width: '70%'}}> 
                     <tr>
-                    <th><input type="checkbox"/></th>
+                    <th>Check jobs</th>
                     <th>Job ID</th>
                     <th>Job Name</th>
                     <th>Category</th>
@@ -51,7 +67,7 @@ function Table({ job }) {
                 <tbody style={{textAlign: 'left'}}>
                     {job.map((item) => (
                         <tr key={item.jobID} >
-                            <td> <input type="checkbox" value={item.jobName} checked={isChecked[item.jobID]} onChange={(e)=>{handleChange(e, item.jobID)}}/></td>
+                            <td> <input type="checkbox" value={item.jobID} checked={isChecked[item.jobID]} onChange={(e)=>{handleChange(e, item.jobID)}}/></td>
                             <td>{item.jobID}</td>
                             <td>{item.jobName}</td>
                             <td>{item.jobCategory}</td>
@@ -60,17 +76,20 @@ function Table({ job }) {
                             <td>{item.experienceRequired}</td>
                             <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
                             <td>{item.description}</td>   
-                        </tr> 
+                        </tr>
                     ))}
                 </tbody>
             </table>
-            <h4>Checked: {isChecked ? "Checked" : "NotChecked"}</h4>
-            <h4>Checked jobs: {checkedJobs} </h4>
-            <button style={{marginLeft: '75%' , marginTop: '20px'}}>Submit job</button>
-            </form>
-             
+            
+            <div style={{paddingLeft: '15%', paddingBottom: '20px'}}> 
+                <h4>Chosen jobs:</h4>
+                    {chooseJob.map((item) => (
+                            <p>{item.jobName}, with a wage of ${item.wage}</p>
+                        ))}
+            </div>
         </div>
     )
+    
 }
 
 export default Table
