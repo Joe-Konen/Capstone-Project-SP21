@@ -7,74 +7,66 @@ Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 
 
 function Map(){
-    const [address, setAddress] = useState("");
-    const [lat, setLat] = useState("");
-    const [lng, setLng] = useState("");
+    const [address, setAddress] = useState([]);
+    const [employeeID, setEmployeeID] = useState([]);
+    const [lat, setLat] = useState([]);
+    const [lng, setLng] = useState(0);
+    
+    const getAddress = () => {
+        Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
+            setAddress(response.data)
+            setEmployeeID(response.data.employerID)
+            //console.log(response.data)
+        })
+    }
 
-    Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
-        console.log(response)
-        console.log("here is the response  " + response.data)
-    })
-    useEffect(()=>{getAddress()},[])
-    // {address.map(a =>{
-    //     return(
-    //         console.log(a)
-    //     )
-    // })}
+    useEffect(() => {
+        getAddress();
 
-    const getAddress =()=> {{addressData.address.map(house=>(
-        Geocode.fromAddress(house.add).then(
-            (response) => {
-            const location = response.results[0].geometry.location;
-            setLat(response.results[0].geometry.location.lat)
-            setLng(response.results[0].geometry.location.lng)
-            
-            console.log(location)
-          
-            },
-            (error) => {
-            
-             console.error(error);
-            }
-        
-      )
-    ))}}
-
+    }, [])
+   
     
 
-//     Geocode.fromAddress("509 Stetzer St, Elburn").then(
-//         (response) => {
-//         const location = response.results[0].geometry.location;
-//         setLat(response.results[0].geometry.location.lat)
-//         setLng(response.results[0].geometry.location.lng)
+    useEffect(() => {
+        address.map((a) => {
+            console.log(a.address)
+            Geocode.fromAddress(a.address).then(
+                response => {
+                    setLat(response.results[0].geometry.location.lat)
+                    setLng(response.results[0].geometry.location.lng)
+                    
+                    console.log(response.results[0].geometry.location.lat)
+                    console.log(response.results[0].geometry.location.lng)
+                }
+            )
+            
+        })
         
-//         console.log(location)
-      
-//         },
-//         (error) => {
-        
-//          console.error(error);
-//         }
-    
-//   )
+    }, [address])
+
+
+
     
     return(
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {addressData.address.map(house=>(
+        {address.map((a)=>(
             <Marker 
-            key={house.add.id}
+            key={a.employerID}
             position={{
                 lat: lat,
                 lng: lng
             }}
             />
+
         ))}
-        
-       
-        
-        
+        <div>
+        {address.map((a) => (
+            <p>{lat}</p>
+            
+        ))}
+        </div>
         
         </GoogleMap>
 
