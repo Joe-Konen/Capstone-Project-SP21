@@ -38,14 +38,17 @@ function RegisterStudent() {
       });
     }
     return (
-        <div className="Login">
-            <div className="Register">
+
+    <div className="container-xs">
+        <div>
+            <div>
                 <h1>Student Registration</h1>
             </div>
             <div class="Register">
                     <label for="fName">First Name: </label>
                     <input type="text"
                         placeholder="First Name"
+                        className="form-input"
                         id = "fName"
                         onChange={(e) => {
                             setFirstName(e.target.value);
@@ -55,6 +58,7 @@ function RegisterStudent() {
                         <label for="lName">Last Name: </label>
                         <input type="text"
                         placeholder="Last Name"
+                        className="form-input"
                         id = "lName"
                         onChange={(e) => {
                             setLastName(e.target.value);
@@ -64,6 +68,7 @@ function RegisterStudent() {
                         <label for="age">Age: </label>
                         <input type="text"
                         placeholder="Age"
+                        className="form-input"
                         id = "age"
                         onChange={(e) => {
                             setAge(e.target.value);
@@ -73,6 +78,7 @@ function RegisterStudent() {
                         <label for="user">Username: </label>
                         <input type="text"
                         placeholder="Username"
+                        className="form-input"
                         id = "user"
                         onChange={(e) => {
                             setUsername(e.target.value);
@@ -82,6 +88,7 @@ function RegisterStudent() {
                         <label for="password">Password: </label>
                         <input type="password"
                         placeholder="Password"
+                        className="form-input"
                         id = "password"
                         onChange={(e) => {
                             setPassword(e.target.value);
@@ -91,6 +98,7 @@ function RegisterStudent() {
                         <label for="email">Email: </label>
                         <input type="text"
                         placeholder="Email"
+                        className="form-input"
                         id = "email"
                         onChange={(e) => {
                             setEmail(e.target.value);
@@ -100,6 +108,7 @@ function RegisterStudent() {
                         <label for="school">School: </label>
                         <input type="text"
                         placeholder="School"
+                        className="form-input"
                         id = "school"
                         onChange={(e) => {
                             setSchool(e.target.value);
@@ -109,16 +118,19 @@ function RegisterStudent() {
                         <label for="phoneNum">Phone Number: </label>
                         <input type="text"
                         placeholder="Phone Number"
+                        className="form-input"
                         id = "phoneNum"
                         onChange={(e) => {
                             setPhone(e.target.value);
                         }}
                         required
                         />
-                        <button className="backButton" onClick={routeChange}>Cancel</button>
-                        <button onClick={studentRegister}>Register</button>
+                        <button className="button button-primary button-wide-mobile" onClick={routeChange}>Cancel</button>
+                        <button onClick={studentRegister} type="submit"
+                        className="button button-primary button-wide-mobile">Register</button>
                 </div>
         </div>
+        </div>    
     );
 }
 export default RegisterStudent;
