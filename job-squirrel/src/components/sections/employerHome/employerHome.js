@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { SectionSplitProps } from '../../../utils/SectionProps';
 import SectionHeader from '../partials/SectionHeader';
 import Image from '../../elements/Image';
+import ButtonGroup from '../../elements/ButtonGroup';
+import Button from '../../elements/Button';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -50,8 +52,8 @@ const FeaturesSplit = ({
   );
 
   const sectionHeader = {
-    title: 'Employer Home!',
-    paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
+    title: 'Welcome to JobSquirrel!',
+    paragraph: 'Here youll find all of the useful tools as an employer on JobSquirrel. Use the tabs at the top of the page or the links below to access tools.'
   };
 
   return (
@@ -60,6 +62,20 @@ const FeaturesSplit = ({
       className={outerClasses}
     >
       <div className="container">
+      <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="EjobPost">
+                    Post A Job
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="employerProfile">
+                    My Profile
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="EcurrPosted">
+                    My Posted Jobs
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="FAQ">
+                    Feedback
+                    </Button>
+        </ButtonGroup>
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
@@ -67,14 +83,19 @@ const FeaturesSplit = ({
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  Start Posting
                   </div>
                 <h3 className="mt-0 mb-12">
-                  Data-driven insights
+                  Get Your Job Posted!
                   </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Access the job posting page to post your new job for students in the area to see and sign up for
                   </p>
+                  <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="EjobPost">
+                    Post A Job
+                    </Button>
+                  </ButtonGroup>
               </div>
               <div className={
                 classNames(
@@ -93,14 +114,19 @@ const FeaturesSplit = ({
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  Keep Track of Jobs
                   </div>
                 <h3 className="mt-0 mb-12">
-                  Data-driven insights
+                  View Your Posted Jobs
                   </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                   You can view the jobs that you currently have posted by clicking the button below or by navigating to the tab at the top. It is important to keep track of what you have posted and prevent posting double jobs. Unless it is marked as completed, a job will remain 'live'. 
                   </p>
+                  <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="EcurrPosted">
+                    My Posted Jobs
+                    </Button>
+                  </ButtonGroup>
               </div>
               <div className={
                 classNames(
@@ -119,13 +145,13 @@ const FeaturesSplit = ({
             <div className="split-item">
               <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
                 <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
+                  Feedback
                   </div>
                 <h3 className="mt-0 mb-12">
-                  Data-driven insights
+                Your Reviews Are Important!
                   </h3>
                 <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  After a job is completed, you can leave a review of how the student did. Be sure to be respectful and accurate as they can review you also. Feedback is important to providing the best possible experience here on JobSquirrel!
                   </p>
               </div>
               <div className={
