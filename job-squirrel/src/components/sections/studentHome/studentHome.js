@@ -108,11 +108,12 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('../../../assets/images/features-split-image-01.png')}
+                  src={require('../../../assets/images/jobBoardScreenshot.PNG')}
                   alt="Features split 01"
                   width={528}
                   height={396} 
-                  onClick={sJobBoard}
+                  
+                  //onClick={sJobBoard}
                   />
               </div>
             </div>

@@ -5,46 +5,13 @@ import { useHistory } from "react-router-dom";
 import ButtonGroup from '../components/elements/ButtonGroup';
 import Button from '../components/elements/Button';
 
-
-
-
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  
-    return (
-
-        <body classname="LogPage" style={{display: "flex", justifyContent: "center"}}>
-        <div className="LogPageDiv">
-            <div className="register">
-                <h1>Need to register?</h1>
-                <button className="help">I'm looking for help</button>
-                <button className="work">I'm looking for work</button>
-            </div>
-            <div className="login">
-                <h1>Already have an account?</h1>
-                <h3>Sign in here</h3>
-                <input type="text"
-                placeholder="username"
-                onChange={(e) => {
-                    setUsername(e.target.value);
-                }}
-                />
-                <input type="password"
-                placeholder="password"
-                onChange={(e) => {
-                    setPassword(e.target.value);
-                }}
-                />
-                <button className="loginButton">Login</button>
-            </div>
-
   const [error, setError] = useState("");
 
-  const history = useHistory();
-
-  Axios.defaults.withCredentials = true;
+const history = useHistory();
+Axios.defaults.withCredentials = true;
   
   const login = () => {
       Axios.post("http://localhost:3001/Login",{
@@ -109,13 +76,20 @@ function Login() {
                 setPassword(e.target.value);
             }}
             />
-            <button onClick={login} type="submit" 
-                    className="button button-primary button-wide-mobile" >Login</button>
+            <div className="reveal-from-bottom" data-reveal-delay="600">
+                <ButtonGroup>
+                    <Button tag="a" color="primary" onClick={login}>
+                    Login
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="/">
+                    Cancel
+                    </Button>
+                </ButtonGroup>
+              </div>
             </form>
         </div>
         
     </div>
 );
 }
-
 export default Login;

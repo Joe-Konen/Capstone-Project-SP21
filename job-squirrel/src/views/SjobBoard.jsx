@@ -1,9 +1,12 @@
-
 import React, {useState, useEffect} from "react";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from "react-google-maps";
 import Geocode from "react-geocode";
 import * as addressData from "../data/address.json";
 import Axios from "axios";
+import Table from "./Table"
+import ButtonGroup from '../components/elements/ButtonGroup';
+import Button from '../components/elements/Button';
+
 Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 
 
@@ -76,7 +79,7 @@ function Map(){
 
 const WrappedMap = withScriptjs(withGoogleMap(Map));
 
-export default function jobBoard(){
+export function jobBoard(){
     return <div style={{width: '50vw', height: '25vw', margin: '50px auto'}}>
             <div style={{display: "flex", justifyContent: "center", fontSize:'50px'}}>
                 Job Board Page<br></br><br></br>
@@ -89,11 +92,11 @@ export default function jobBoard(){
 
     </div>;
 }
-=======
-import React, {useState, useEffect} from 'react';
-import Axios from "axios";
-import './stylesheets/Style.css';
-import Table from "./Table"
+
+//import React, {useState, useEffect} from 'react';
+//import Axios from "axios";
+//import './stylesheets/Style.css';
+
 
 function SjobBoard() {
 
@@ -163,6 +166,7 @@ function SjobBoard() {
 
     
     return (
+        <body>
         <div>
             <h1 style={{textAlign: 'center', padding: '25px'}}>Welcome to the Student Job Board</h1>
             <div style={{paddingLeft: '15%', paddingBottom: '20px'}}>
@@ -170,7 +174,16 @@ function SjobBoard() {
                 <input style={{height: '25px'}} type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
             </div>
             <Table job={searchBar(job)}/>
+            
         </div>
+        <div style={{paddingLeft: '15%', paddingBottom: '20px'}}className="reveal-from-bottom" data-reveal-delay="600">
+        <ButtonGroup>
+            <Button tag="a" color="primary" wideMobile href="/HomeStudent">
+            Go Back
+            </Button>
+        </ButtonGroup>
+      </div>
+      </body>
         
         // <div>
         //     <h1 style={{textAlign: 'center', padding: '25px'}}>Welcome to the Student Job Board</h1>

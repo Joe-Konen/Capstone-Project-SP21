@@ -14,7 +14,6 @@ import Login from './views/Login';
 import HomeStudent from './views/HomeStudent';
 import HomeEmployer from './views/HomeEmployer';
 import SjobBoard from './views/SjobBoard';
-import SjobBoard from './views/SjobBoard'
 import StudentRegister from './views/StudentRegister';
 import EmployerRegister from './views/EmployerRegister';
 import StudentProfile from './views/StudentProfile';

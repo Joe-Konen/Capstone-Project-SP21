@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import './stylesheets/Style.css';
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
-
+import ButtonGroup from '../components/elements/ButtonGroup';
+import Button from '../components/elements/Button';
 
 
 function Login() {
@@ -38,6 +39,7 @@ function Login() {
     
   };
 
+
   function handleSubmit(event){
     event.preventDefault(); 
     
@@ -66,8 +68,16 @@ function Login() {
                 setPassword(e.target.value);
             }}
             />
-            <button onClick={login} type="submit" 
-                    className="button button-primary button-wide-mobile" >Login</button>
+           <div className="reveal-from-bottom" data-reveal-delay="600">
+                <ButtonGroup>
+                    <Button tag="a" color="primary" onClick={login}>
+                    Login
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="/">
+                    Cancel
+                    </Button>
+                </ButtonGroup>
+              </div>
             </form>
         </div>
         

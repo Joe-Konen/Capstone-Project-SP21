@@ -81,14 +81,14 @@ const Hero = ({
           </div>
           <div className="hero-figure reveal-from-bottom illustration-element-01" data-reveal-value="20px" data-reveal-delay="800">
             <a
-              data-video="https://player.vimeo.com/video/174002812"
+              data-video="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
               href="#0"
               aria-controls="video-modal"
               onClick={openModal}
             >
               <Image
                 className="has-shadow"
-                src={require('./../../assets/images/video-placeholder.jpg')}
+                src={require('./../../assets/images/SquirrelLooking.jpg')}
                 alt="Hero"
                 width={896}
                 height={504} />
@@ -98,7 +98,7 @@ const Hero = ({
             id="video-modal"
             show={videoModalActive}
             handleClose={closeModal}
-            video="https://player.vimeo.com/video/174002812"
+            video="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
             videoTag="iframe" />
         </div>
       </div>
