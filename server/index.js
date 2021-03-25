@@ -154,9 +154,6 @@ app.post("/Login", (req, res) => {
             [username, password],
             (err, result) => {
                 if(result.length > 0){
-
-                    res.send("You are logged in as a employer");
-
                     req.session.user = result
                     res.send("You are logged in as an employer");
                     const emp = JSON.stringify({
@@ -167,7 +164,6 @@ app.post("/Login", (req, res) => {
                     loggedInUser.pass = password;
                     console.log(emp);
                     console.log(`FL2${logged}`);
-
                     return;
                 }
                 if(!err){
@@ -175,10 +171,6 @@ app.post("/Login", (req, res) => {
                     [username, password],
                     (err, result) => {
                         if(result.length > 0){
-
-                            res.send("You are logged in as a student");
-                            return;
-
                             req.session.user = result
                             res.send("You are logged in as a student");
                             const stu = JSON.stringify({
@@ -191,11 +183,10 @@ app.post("/Login", (req, res) => {
                             return;
                         }else{
                             res.send("Login incorrect, try again.")
-
                         }
                     }
-                )}    
-        })   
+                )}
+        })
     });
 })
 
