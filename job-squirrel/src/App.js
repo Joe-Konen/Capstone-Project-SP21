@@ -4,6 +4,7 @@ import AppRoute from './utils/AppRoute';
 import ScrollReveal from './utils/ScrollReveal';
 import ReactGA from 'react-ga';
 
+
 // Layouts
 import LayoutDefault from './layouts/LayoutDefault';
 
@@ -12,6 +13,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import HomeStudent from './views/HomeStudent';
 import HomeEmployer from './views/HomeEmployer';
+import SjobBoard from './views/SjobBoard';
 import SjobBoard from './views/SjobBoard'
 import StudentRegister from './views/StudentRegister';
 import EmployerRegister from './views/EmployerRegister';
@@ -23,6 +25,7 @@ import studentProfile from './views/StudentProfile';
 import employerProfile from './views/EmployerProfile';
 import EjobPost from './views/EjobPost';
 import EcurrPosted from './views/EcurrPosted';
+
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);

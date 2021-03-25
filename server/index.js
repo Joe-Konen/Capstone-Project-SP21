@@ -12,6 +12,9 @@ const session = require("express-session");
 const e = require("express");
 
 app.use(express.json());
+
+//app.use(cors());
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors({
@@ -42,15 +45,22 @@ const db = mysql.createPool({
     multipleStatements: true,
 });
 
+
 const loggedInUser = {
     user: "",
     pass: ""
 };
 
+
 db.getConnection(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
+
+
+app.post("/loginUser", (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
 
 app.get("/", (req,res) => {
     loggedInUser.user = "";
@@ -129,6 +139,9 @@ app.post("/Login", (req, res) => {
             [username, password],
             (err, result) => {
                 if(result.length > 0){
+
+                    res.send("You are logged in as a employer");
+
                     req.session.user = result
                     res.send("You are logged in as an employer");
                     const emp = JSON.stringify({
@@ -139,6 +152,7 @@ app.post("/Login", (req, res) => {
                     loggedInUser.pass = password;
                     console.log(emp);
                     console.log(`FL2${logged}`);
+
                     return;
                 }
                 if(!err){
@@ -146,6 +160,10 @@ app.post("/Login", (req, res) => {
                     [username, password],
                     (err, result) => {
                         if(result.length > 0){
+
+                            res.send("You are logged in as a student");
+                            return;
+
                             req.session.user = result
                             res.send("You are logged in as a student");
                             const stu = JSON.stringify({
@@ -158,6 +176,7 @@ app.post("/Login", (req, res) => {
                             return;
                         }else{
                             res.send("Login incorrect, try again.")
+
                         }
                     }
                 )}    
@@ -166,15 +185,28 @@ app.post("/Login", (req, res) => {
 })
 
 
+app.get("/SjobBoard", (req,res)=>{
+    //const address  = req.body.address;
+    db.getConnection(function(err,connection){
+        db.query("SELECT address, employerID FROM Employer",
+            (err2,result)=>{
+                res.send(result)
+                if(err2) throw err2
+
+
 app.get("/JobBoard", (req, res) => {
 
     db.getConnection(function(err, connection){
         db.query("SELECT * FROM Job WHERE status = 0", (err, result) => {
             console.log(result);
             res.send(result) 
+
         })
     })
 })
+
+
+app.listen(3001);
 
 app.post("/JobBoard", (req, res) => {
     db.query("INSERT INTO StudentToDoJobs", (err, result) => {
@@ -282,5 +314,6 @@ app.listen(3001);
         res.send("edited info")
     });
      **/
+
 
 
