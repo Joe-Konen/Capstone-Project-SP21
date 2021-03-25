@@ -20,6 +20,10 @@ app.use(cors({
     credentials: true
 }));
 
+var logged = ""
+var loggedIn = logged;
+console.log(`FL:${logged}`);
+
 app.use(session({
     key: "userID",
     secret: "jobsquirrel",
@@ -38,14 +42,85 @@ const db = mysql.createPool({
     multipleStatements: true,
 });
 
+const loggedInUser = {
+    user: "",
+    pass: ""
+};
+
 db.getConnection(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
 
+app.get("/", (req,res) => {
+    loggedInUser.user = "";
+    loggedInUser.pass = "";
+    console.log("Cleared out user");
+})
+
+app.get("/getStudent", (req, res) => {
+    let username = loggedInUser.user;
+    let password = loggedInUser.pass;
+    let userInfo = [];
+    db.query(
+        "SELECT * FROM Student WHERE stu_username = ? AND stu_password = ?",
+        [username, password],
+        (err, result, fields) => {
+            if(err) throw err;
+            console.log("grabbing user");
+            userInfo.push(result[0].stu_username);
+            userInfo.push(result[0].stu_password);
+            userInfo.push(result[0].email);
+            userInfo.push(result[0].age);
+            userInfo.push(result[0].firstName);
+            userInfo.push(result[0].lastName);
+            userInfo.push(result[0].schoolName);
+            res.send(userInfo);
+        }
+    )
+})
+
+app.post("/editStudent", (req,res) => {
+    const stuUsername = req.body.username;
+    const stuPassword = req.body.password;
+    const stuFName = req.body.fName;
+    const stuLName = req.body.lName;
+    const school = req.body.school;
+    var stuAge = req.body.age;
+    const stuEmail = req.body.email;
+
+    stuAge = parseInt(stuAge);
+
+    var values = [
+        stuFName, stuLName, school, stuAge, stuEmail, stuPassword, stuUsername, loggedInUser.user, loggedInUser.pass
+    ];
+
+    console.log(values);
+
+    db.query(
+        "UPDATE Student SET " +
+        "firstName = ?, " +
+        "lastName = ?, " +
+        "schoolName = ?, " +
+        "age = ?, " +
+        "email = ?, " +
+        "stu_password = ?, " +
+        "stu_username = ? " +
+        "WHERE stu_username = ? AND stu_password = ?",
+        values,
+        function(err, rows, fields){
+            if (err) throw err;
+            loggedInUser.user = stuUsername;
+            loggedInUser.pass = stuPassword;
+        });
+    
+        res.send("edited")
+})
+
 app.post("/Login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    const logged = req.body.username
 
     db.getConnection(function(err, connection){
 
@@ -60,7 +135,10 @@ app.post("/Login", (req, res) => {
                         username,
                         password,
                     })
+                    loggedInUser.user = username;
+                    loggedInUser.pass = password;
                     console.log(emp);
+                    console.log(`FL2${logged}`);
                     return;
                 }
                 if(!err){
@@ -74,6 +152,8 @@ app.post("/Login", (req, res) => {
                                 username,
                                 password,
                             })
+                            loggedInUser.user = username;
+                            loggedInUser.pass = password;
                             console.log(stu)
                             return;
                         }else{
@@ -84,6 +164,7 @@ app.post("/Login", (req, res) => {
         })   
     });
 })
+
 
 app.get("/JobBoard", (req, res) => {
 
@@ -103,3 +184,103 @@ app.post("/JobBoard", (req, res) => {
 })
 
 app.listen(3001);
+
+
+app.post("/studentRegister", (req, res) => {
+    const stuUsername = req.body.username;
+    const stuPassword = req.body.password;
+    const stuFName = req.body.fName;
+    const stuLName = req.body.lName;
+    const school = req.body.school;
+    //const phone = req.body.phone;
+    var stuAge = req.body.age;
+    const stuEmail = req.body.email;
+
+    stuAge = parseInt(stuAge);
+
+    var values = [
+        [stuFName, stuLName, school, stuAge, stuEmail, stuPassword, stuUsername]
+    ];
+
+    console.log(values[0]);
+
+    db.query(
+        "INSERT INTO Student (firstName, lastName, schoolName, age, email, stu_password, stu_username) VALUES (?)",
+        values,
+        function(err, rows, fields){
+            if (err) throw err;
+        });
+    
+        res.send("registered")
+    });
+
+app.post("/employerRegister", (req, res) => {
+    const empUsername = req.body.username;
+    const empPassword = req.body.password;
+    const empFName = req.body.fName;
+    const empLName = req.body.lName;
+    const empAddress = req.body.address;
+    //const phone = req.body.phone;
+    const empEmail = req.body.email;
+    
+    var values = [
+        [empFName, empLName, empAddress, empEmail, empPassword, empUsername]
+    ];
+    
+    console.log(values[0]);
+    
+    db.query(
+        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username) VALUES (?)",
+        values,
+        function(err, rows, fields){
+            if (err) throw err;
+        });
+        
+        res.send("registered")
+    });
+
+app.post("/employerEdit", (req, res) => {
+    const empUsername = req.body.username;
+    const empPassword = req.body.password;
+    const empFName = req.body.fName;
+    const empLName = req.body.lName;
+    const empAddress = req.body.address;
+    //const phone = req.body.phone;
+    const empEmail = req.body.email;
+    const userloggedIn = loggedIn
+
+    console.log(empUsername);
+    console.log(empFName);
+    console.log(empLName);
+    
+
+    db.getConnection(function (err, connect) {
+        console.log("flag")
+        if (err) throw err;
+        console.log(loggedIn);
+        //var query = 'UPDATE Employer SET firstName = ?, lastName = ?, address = ?, email = ?, emp_password = ?, emp_username = ? WHERE emp_username = ?';
+        var query = `UPDATE Employer SET firstName = '${empFName}', lastName = '${empLName}' WHERE emp_username = '${logged}'`;
+        console.log(query)
+        db.query(query, [empFName, empLName, empAddress, empEmail, empPassword, empUsername, userloggedIn], function (err, result, rows, fields) {
+            if (err) throw err;
+            console.log(result)
+        });
+        db.releaseConnection(connect);
+    });
+    res.send("edited!");
+});
+
+app.listen(3001);
+
+   /** db.query(
+        "UPDATE Employer SET firstName = ?, lastName = ?, address = ?, email = ?, emp_password = ?, emp_username = ? WHERE emp_username = ?",
+        empFName, empLName, empAddress, empEmail, empPassword, empUsername, userloggedIn,
+        function(err, rows, fields){
+            if (err) throw err;
+        });
+        
+        res.send("edited info")
+    });
+     **/
+
+
