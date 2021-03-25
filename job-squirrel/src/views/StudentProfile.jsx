@@ -70,6 +70,7 @@ const getData = () => {
             <label for="fName">First Name: </label>
                 <input type="text"
                 placeholder="First Name"
+                className="form-input"
                 id = "fName"
                 defaultValue = {fNameStu}
                 onChange={(e) => {
@@ -79,6 +80,7 @@ const getData = () => {
             <label for="lName">Last Name: </label>
                 <input type="text"
                 placeholder="Last Name"
+                className="form-input"
                 id = "lName"
                 defaultValue = {lNameStu}
                 onChange={(e) => {
@@ -88,6 +90,7 @@ const getData = () => {
             <label for="email">Email: </label>
                 <input type="text"
                 placeholder="Email"
+                className="form-input"
                 id = "email"
                 defaultValue = {emailStu}
                 onChange={(e) => {
@@ -97,6 +100,7 @@ const getData = () => {
             <label for="username">Username: </label>
                 <input type="text"
                 placeholder="Username"
+                className="form-input"
                 id = "username"
                 defaultValue = {usernameStu}
                 onChange={(e) => {
@@ -106,6 +110,7 @@ const getData = () => {
             <label for="password">Password: </label>
                 <input type="password"
                 placeholder="Password"
+                className="form-input"
                 id = "password"
                 defaultValue = {passwordStu}
                 onChange={(e) => {
@@ -115,6 +120,7 @@ const getData = () => {
             <label for="school">School: </label>
                 <input type="text"
                 placeholder="School"
+                className="form-input"
                 id = "school"
                 defaultValue = {schoolStu}
                 onChange={(e) => {
@@ -124,14 +130,15 @@ const getData = () => {
             <label for="age">Age: </label>
                 <input type="text"
                 placeholder="Age"
+                className="form-input"
                 id = "age"
                 defaultValue = {ageStu}
                 onChange={(e) => {
                     setAge(e.target.value);
                 }}
             />
-            <button className="backButton" onClick={routeChange}>Cancel</button>
-            <button onClick={employerRegister}>Confirm Edits</button>
+            <button className="button button-primary button-wide-mobile" onClick={routeChange}>Cancel</button>
+            <button className="button button-primary button-wide-mobile" onClick={employerRegister}>Confirm Edits</button>
         </div>
     </div>
     );
@@ -139,87 +146,4 @@ const getData = () => {
 
 export default StudentProfile;
 
-import './stylesheets/Style.css';
-import Axios from "axios";
-import { useHistory } from "react-router-dom";
-
-function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const history = useHistory();
-
-  Axios.defaults.withCredentials = true;
-  
-  const login = () => {
-      Axios.post("http://localhost:3001/Login",{
-          username: username,
-          password: password,
-      }).then((response) => { 
-          setUsername(response.data.username);
-          console.log(username)
-          console.log(response.data)
-          const user = localStorage.setItem('username', username)
-          if(response.data == "You are logged in as a student"){
-            history.push("/HomeStudent");
-            console.log(user)
-
-        }else if(response.data == "You are logged in as an employer"){
-            history.push("/HomeEmployer");
-            
-        }else{
-            console.log("Login incorrect, try again.");
-            setError("Login incorrect, try again.");
-        }
-      });
-    
-  };
-
-  function handleSubmit(event){
-    event.preventDefault(); 
-    
-  }
-
-    return (
-
-        <div className="container-xs">
-        <div className="currentInfo">
-            <h1>My Profile</h1>
-            <p>Username: {username}</p>
-            <p>First Name: {username}</p>
-            <p>Last Name: {username}</p>
-            <p>School: {username}</p>
-            <p>Current Password: {password}</p>
-            
-        </div>
-        <div className="change-info">
-            <form onSubmit={handleSubmit}>
-            <h1>Already have an account?</h1>
-            <h3>Sign in here</h3>
-            {(error != "") ? (<div className="error">{error}</div>) : ""}
-            <input type="text"
-            placeholder="username"
-            className="form-input"
-            onChange={(e) => {
-                setUsername(e.target.value);
-            }}
-            />
-            <input type="password"
-            placeholder="password"
-            className="form-input"
-            onChange={(e) => {
-                setPassword(e.target.value);
-            }}
-            />
-            <button onClick={login} type="submit" 
-                    className="button button-primary button-wide-mobile" >Change Selected Fields</button>
-            </form>
-        </div>
-        
-    </div>
-);
-}
-
-export default Login;
 
