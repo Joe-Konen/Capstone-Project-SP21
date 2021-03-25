@@ -20,10 +20,6 @@ app.use(cors({
     credentials: true
 }));
 
-var logged = ""
-var loggedIn = logged;
-console.log(`FL:${logged}`);
-
 app.use(session({
     key: "userID",
     secret: "jobsquirrel",
@@ -79,6 +75,26 @@ app.get("/getStudent", (req, res) => {
         }
     )
 })
+app.get("/getEmployer", (req, res) => {
+    let username = loggedInUser.user;
+    let password = loggedInUser.pass;
+    let userInfo = [];
+    db.query(
+        "SELECT * FROM Employer WHERE emp_username = ? AND emp_password = ?",
+        [username, password],
+        (err, result, fields) => {
+            if(err) throw err;
+            console.log("grabbing user");
+            userInfo.push(result[0].emp_username);
+            userInfo.push(result[0].emp_password);
+            userInfo.push(result[0].email);
+            userInfo.push(result[0].address);
+            userInfo.push(result[0].firstName);
+            userInfo.push(result[0].lastName);
+            res.send(userInfo);
+        }
+    )
+})
 
 app.post("/editStudent", (req,res) => {
     const stuUsername = req.body.username;
@@ -116,6 +132,8 @@ app.post("/editStudent", (req,res) => {
     
         res.send("edited")
 })
+
+
 
 app.post("/Login", (req, res) => {
     const username = req.body.username;
@@ -219,47 +237,40 @@ app.post("/employerRegister", (req, res) => {
         res.send("registered")
     });
 
-app.post("/employerEdit", (req, res) => {
-    const empUsername = req.body.username;
-    const empPassword = req.body.password;
-    const empFName = req.body.fName;
-    const empLName = req.body.lName;
-    const empAddress = req.body.address;
-    //const phone = req.body.phone;
-    const empEmail = req.body.email;
-    const userloggedIn = loggedIn
+    app.post("/employerEdit", (req,res) => {
+        const empUsername = req.body.username;
+        const empPassword = req.body.password;
+        const empFName = req.body.fName;
+        const empLName = req.body.lName;
+        const empAddress = req.body.address;
+        const empEmail = req.body.email;
 
-    console.log(empUsername);
-    console.log(empFName);
-    console.log(empLName);
+        var values = [
+            empFName, empLName, empAddress, empEmail, empPassword, empUsername, loggedInUser.user, loggedInUser.pass
+        ];
     
-
-    db.getConnection(function (err, connect) {
-        console.log("flag")
-        if (err) throw err;
-        console.log(loggedIn);
-        //var query = 'UPDATE Employer SET firstName = ?, lastName = ?, address = ?, email = ?, emp_password = ?, emp_username = ? WHERE emp_username = ?';
-        var query = `UPDATE Employer SET firstName = '${empFName}', lastName = '${empLName}' WHERE emp_username = '${logged}'`;
-        console.log(query)
-        db.query(query, [empFName, empLName, empAddress, empEmail, empPassword, empUsername, userloggedIn], function (err, result, rows, fields) {
-            if (err) throw err;
-            console.log(result)
-        });
-        db.releaseConnection(connect);
-    });
-    res.send("edited!");
-});
+        console.log(values);
+    
+        db.query(
+            "UPDATE Employer SET " +
+            "firstName = ?, " +
+            "lastName = ?, " +
+            "address = ?, " +
+            "email = ?, " +
+            "emp_password = ?, " +
+            "emp_username = ? " +
+            "WHERE emp_username = ? AND emp_password = ?",
+            values,
+            function(err, rows, fields){
+                if (err) throw err;
+                loggedInUser.user = empUsername;
+                loggedInUser.pass = empPassword;
+            });
+        
+            res.send("editedEmployer")
+    })
 
 app.listen(3001);
 
-   /** db.query(
-        "UPDATE Employer SET firstName = ?, lastName = ?, address = ?, email = ?, emp_password = ?, emp_username = ? WHERE emp_username = ?",
-        empFName, empLName, empAddress, empEmail, empPassword, empUsername, userloggedIn,
-        function(err, rows, fields){
-            if (err) throw err;
-        });
-        
-        res.send("edited info")
-    });
-     **/
+ 
 
