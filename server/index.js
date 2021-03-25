@@ -166,6 +166,26 @@ app.post("/Login", (req, res) => {
 })
 
 
+app.get("/JobBoard", (req, res) => {
+
+    db.getConnection(function(err, connection){
+        db.query("SELECT * FROM Job WHERE status = 0", (err, result) => {
+            console.log(result);
+            res.send(result) 
+        })
+    })
+})
+
+app.post("/JobBoard", (req, res) => {
+    db.query("INSERT INTO StudentToDoJobs", (err, result) => {
+        console.log(result)
+        res.send(result);
+    })
+})
+
+app.listen(3001);
+
+
 app.post("/studentRegister", (req, res) => {
     const stuUsername = req.body.username;
     const stuPassword = req.body.password;
@@ -262,4 +282,5 @@ app.listen(3001);
         res.send("edited info")
     });
      **/
+
 
