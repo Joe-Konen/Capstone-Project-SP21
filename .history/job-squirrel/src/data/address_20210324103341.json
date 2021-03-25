@@ -1,0 +1,20 @@
+{
+    "address": [
+        {
+            "id": 1
+            "add": "123 weendows st"
+          },
+          {
+              "id": 2
+            "add": "123 Weendows Ave."
+          },
+          {
+              "id": 3
+            "add": "40W835 Norris Road"
+          },
+          {
+              "id":4
+            "add": "40W835 Norris Roads"
+          }
+    ]
+}

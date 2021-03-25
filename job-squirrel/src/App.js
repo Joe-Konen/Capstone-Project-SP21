@@ -4,6 +4,7 @@ import AppRoute from './utils/AppRoute';
 import ScrollReveal from './utils/ScrollReveal';
 import ReactGA from 'react-ga';
 
+
 // Layouts
 import LayoutDefault from './layouts/LayoutDefault';
 
@@ -12,11 +13,11 @@ import Home from './views/Home';
 import Login from './views/Login';
 import HomeStudent from './views/HomeStudent';
 import HomeEmployer from './views/HomeEmployer';
+import SjobBoard from './views/SjobBoard';
+import SjobBoard from './views/SjobBoard'
 import StudentRegister from './views/StudentRegister';
 import EmployerRegister from './views/EmployerRegister';
-
 import StudentProfile from './views/StudentProfile';
-
 import Contact from './views/Contact';
 import About from './views/About';
 import FAQ from './views/FAQ';
@@ -65,6 +66,7 @@ const App = () => {
           <AppRoute exact path="/FAQ" component={FAQ} layout={LayoutDefault} />
           <AppRoute exact path="/studentProfile" component={studentProfile} layout={LayoutDefault} />
           <AppRoute exact path="/HomeEmployer" component={HomeEmployer} layout={LayoutDefault} />
+          <AppRoute exact path="/SjobBoard" component={SjobBoard} layout={LayoutDefault} />
           <AppRoute exact path="/EmployerRegister" component={EmployerRegister} layout={LayoutDefault} />
           <AppRoute exact path="/StudentProfile" component={StudentProfile} layout={LayoutDefault} />
           <AppRoute exact path="/employerProfile" component={employerProfile} layout={LayoutDefault} />
