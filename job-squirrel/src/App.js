@@ -1,30 +1,80 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navigation, Footer, HomeStudent, HomeEmployer, About, Login, StudentRegister, EmployerRegister, Help, StudentProfile, EmployerProfile, SjobBoard, SjobSelect, SjobsToDo, EjobPost, EcurrPosted } from "./components";
-function App() {
+import React, { useRef, useEffect, useState } from 'react';
+import { useLocation, Switch } from 'react-router-dom';
+import AppRoute from './utils/AppRoute';
+import ScrollReveal from './utils/ScrollReveal';
+import ReactGA from 'react-ga';
+
+
+// Layouts
+import LayoutDefault from './layouts/LayoutDefault';
+
+// Views 
+import Home from './views/Home';
+import Login from './views/Login';
+import HomeStudent from './views/HomeStudent';
+import HomeEmployer from './views/HomeEmployer';
+import SjobBoard from './views/SjobBoard';
+import SjobBoard from './views/SjobBoard'
+import StudentRegister from './views/StudentRegister';
+import EmployerRegister from './views/EmployerRegister';
+import StudentProfile from './views/StudentProfile';
+import Contact from './views/Contact';
+import About from './views/About';
+import FAQ from './views/FAQ';
+import studentProfile from './views/StudentProfile';
+import employerProfile from './views/EmployerProfile';
+import EjobPost from './views/EjobPost';
+import EcurrPosted from './views/EcurrPosted';
+
+
+// Initialize Google Analytics
+ReactGA.initialize(process.env.REACT_APP_GA_CODE);
+
+const trackPage = page => {
+  ReactGA.set({ page });
+  ReactGA.pageview(page);
+};
+
+const App = () => {
+
+  const [user, setUser] = useState();
+
+  const childRef = useRef();
+  let location = useLocation();
+
+  useEffect(() => {
+    const page = location.pathname;
+    document.body.classList.add('is-loaded')
+    childRef.current.init();
+    trackPage(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
+  
+
   return (
-    <div className="App">
-      <Router>
-        <Navigation />
+    <ScrollReveal
+      ref={childRef}
+      children={() => (
         <Switch>
-          <Route path="/StudentHome" exact component={() => <HomeStudent />} />
-          <Route path="/EmployerHome" exact component={() => <HomeEmployer />} />
-          <Route path="/About" exact component={() => <About />} />
-          <Route path="/" exact component={() => <Login />} />
-          <Route path="/Register/StudentRegister" exact component={() => <StudentRegister />} />
-          <Route path="/Register/EmployerRegister" exact component={() => <EmployerRegister />} />
-          <Route path="/Help" exact component={() => <Help />} />
-          <Route path="/Student/Profile" exact component={() => <StudentProfile />} />
-          <Route path="/Employer/Profile" exact component={() => <EmployerProfile />} />
-          <Route path="/Student/JobBoard" exact component={() => <SjobBoard />} />
-          <Route path="/Student/JobSelect" exact component={() => <SjobSelect />} />
-          <Route path="/Student/JobsToDo" exact component={() => <SjobsToDo />} />
-          <Route path="/Employer/JobPosting" exact component={() => <EjobPost />} />
-          <Route path="/Employer/CurrentlyPosted" exact component={() => <EcurrPosted />} />
+          <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
+          <AppRoute exact path="/login" component={Login} layout={LayoutDefault} />
+          <AppRoute exact path="/HomeStudent" component={HomeStudent} layout={LayoutDefault} />
+          <AppRoute exact path="/StudentRegister" component={StudentRegister} layout={LayoutDefault} />
+          <AppRoute exact path="/Contact" component={Contact} layout={LayoutDefault} />
+          <AppRoute exact path="/About" component={About} layout={LayoutDefault} />
+          <AppRoute exact path="/FAQ" component={FAQ} layout={LayoutDefault} />
+          <AppRoute exact path="/studentProfile" component={studentProfile} layout={LayoutDefault} />
+          <AppRoute exact path="/HomeEmployer" component={HomeEmployer} layout={LayoutDefault} />
+          <AppRoute exact path="/SjobBoard" component={SjobBoard} layout={LayoutDefault} />
+          <AppRoute exact path="/EmployerRegister" component={EmployerRegister} layout={LayoutDefault} />
+          <AppRoute exact path="/StudentProfile" component={StudentProfile} layout={LayoutDefault} />
+          <AppRoute exact path="/employerProfile" component={employerProfile} layout={LayoutDefault} />
+          <AppRoute exact path="/myJobsPosted" component={EcurrPosted} layout={LayoutDefault} />
+          <AppRoute exact path="/newJobPosting" component={EjobPost} layout={LayoutDefault} />
+
         </Switch>
-        <Footer />
-      </Router>
-    </div>
+      )} />
   );
 }
 
