@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from "axios";
 import './stylesheets/Style.css';
-import Table from "./Table"
-import ButtonGroup from '../components/elements/ButtonGroup';
-import Button from '../components/elements/Button';
 
 
 function SjobBoard() {
