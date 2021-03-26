@@ -10,9 +10,11 @@ Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 function Map(){
     const [address, setAddress] = useState([]);
     const [employerID, setEmployerID] = useState([]);
-    const [lat, setLat] = useState([]);
-    const [lng, setLng] = useState([]);
+    const [lat, setLat] = useState(0);
+    const [lng, setLng] = useState(0);
     const [selectedAdd, setSelectedAdd] = useState(null);
+    const [locateLat, setLocateLat] = useState([]);
+    const [locateLng, setLocateLng] = useState([]);
 
     
     const getAddress = () => {
@@ -26,9 +28,7 @@ function Map(){
     useEffect(() => {
         getAddress();
 
-    }, [])
-   
-    
+    }, [])    
 
     useEffect(() => {
         address.map((a) => {
@@ -40,8 +40,15 @@ function Map(){
 
                     console.log(a.address)
                     
-                    console.log(response.results[0].geometry.location.lat)
-                    console.log(response.results[0].geometry.location.lng)
+                    // console.log(response.results[0].geometry.location.lat)
+                    // console.log(response.results[0].geometry.location.lng)
+
+                    locateLat.push(response.results[0].geometry.location.lat)
+                    locateLng.push(response.results[0].geometry.location.lng)
+                    setLocateLat(arr => [...arr])
+                    setLocateLng(arr => [...arr])
+                    console.log(locateLat)
+                    console.log(locateLng)
 
                 }
             )
@@ -56,7 +63,6 @@ function Map(){
 
         {address.map((a)=>(
             <Marker 
-            key={a.employerID}
             position={{
                 lat: lat,
                 lng: lng
