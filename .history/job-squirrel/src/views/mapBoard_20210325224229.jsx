@@ -13,7 +13,6 @@ function Map(){
     const [lat, setLat] = useState([]);
     const [lng, setLng] = useState([]);
     const [selectedAdd, setSelectedAdd] = useState(null);
-
     
     const getAddress = () => {
         Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
@@ -54,9 +53,9 @@ function Map(){
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a)=>(
+        {placeLat.map((a)=>(
             <Marker 
-            key={a.employerID}
+            key={a}
             position={{
                 lat: lat,
                 lng: lng

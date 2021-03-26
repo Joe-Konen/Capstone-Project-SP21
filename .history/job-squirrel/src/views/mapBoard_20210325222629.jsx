@@ -13,7 +13,7 @@ function Map(){
     const [lat, setLat] = useState([]);
     const [lng, setLng] = useState([]);
     const [selectedAdd, setSelectedAdd] = useState(null);
-
+    let placeLat = []
     
     const getAddress = () => {
         Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
@@ -42,6 +42,8 @@ function Map(){
                     
                     console.log(response.results[0].geometry.location.lat)
                     console.log(response.results[0].geometry.location.lng)
+
+                    place.push(response.results[0].geometry.location.lat)
 
                 }
             )

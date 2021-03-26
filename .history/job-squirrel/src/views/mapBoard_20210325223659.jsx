@@ -13,7 +13,8 @@ function Map(){
     const [lat, setLat] = useState([]);
     const [lng, setLng] = useState([]);
     const [selectedAdd, setSelectedAdd] = useState(null);
-
+    let placeLat = [];
+    let placeLng = [];
     
     const getAddress = () => {
         Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
@@ -43,6 +44,8 @@ function Map(){
                     console.log(response.results[0].geometry.location.lat)
                     console.log(response.results[0].geometry.location.lng)
 
+                    placeLat.push(response.results[0].geometry.location.lat)
+                    placeLng.push(response.results[0].geometry.location.lng)
                 }
             )
             
@@ -63,6 +66,9 @@ function Map(){
             }}
             onClick={()=>{
                 setSelectedAdd(a);
+            }}
+            icon={{
+                url: '../../public/'
             }}
             />
 

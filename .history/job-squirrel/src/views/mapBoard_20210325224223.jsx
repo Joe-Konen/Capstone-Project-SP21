@@ -43,6 +43,8 @@ function Map(){
                     console.log(response.results[0].geometry.location.lat)
                     console.log(response.results[0].geometry.location.lng)
 
+                    placeLat.push(response.results[0].geometry.location.lat)
+                    placeLng.push(response.results[0].geometry.location.lng)
                 }
             )
             
@@ -54,9 +56,9 @@ function Map(){
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a)=>(
+        {placeLat.map((a)=>(
             <Marker 
-            key={a.employerID}
+            key={a}
             position={{
                 lat: lat,
                 lng: lng

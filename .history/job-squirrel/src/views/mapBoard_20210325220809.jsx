@@ -14,6 +14,7 @@ function Map(){
     const [lng, setLng] = useState([]);
     const [selectedAdd, setSelectedAdd] = useState(null);
 
+    const locate = []
     
     const getAddress = () => {
         Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
@@ -43,12 +44,20 @@ function Map(){
                     console.log(response.results[0].geometry.location.lat)
                     console.log(response.results[0].geometry.location.lng)
 
+                    locate.push({
+                        lat: lat,
+                        lng: lng
+                    })
+
                 }
             )
             
         })
         
     }, [address])
+
+
+
     
     return(
                 
@@ -58,8 +67,8 @@ function Map(){
             <Marker 
             key={a.employerID}
             position={{
-                lat: lat,
-                lng: lng
+                lat: locate.lat,
+                lng: locate.lng
             }}
             onClick={()=>{
                 setSelectedAdd(a);
@@ -71,15 +80,15 @@ function Map(){
             <InfoWindow
             position={{lat:lat, lng:lng}}
             onCloseClick={()=>{setSelectedAdd(null)}}>
-                <div>This is where Job info will be</div>
+                <div>{lat},{lng}</div>
             </InfoWindow>
         )}
-        {/* <div>
+        <div>
         {address.map((a) => (
             <p>{lat},{lng}</p>
            
         ))}
-        </div> */}
+        </div>
         
         </GoogleMap>
 
