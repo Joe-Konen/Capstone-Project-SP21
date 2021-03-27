@@ -305,4 +305,30 @@ app.post("/employerEdit", (req,res) => {
         res.send("editedEmployer")
 })
 
+app.post('/jobPosting', (req, res) => {
+    const jobID = req.body.jobID;
+    const jobName = req.body.jobName;
+    const jobCategory = req.body.jobCategory;
+    const wage = req.body.wage;
+    const skillLevel = req.body.skillLevel;
+    const expRequired = req.body.experienceRequired;
+    const datePosted = req.body.datePosted;
+    const status = req.body.status;
+    const desc = req.body.description;
+    const empID = req.body.employerID;
+
+    var values = [
+        [jobID, jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc, empID]
+    ];
+
+    console.log(values);
+
+    db.getConnection(function(err,connection){
+        db.query("INSERT INTO Job (jobID, jobName, jobCategory, wage, skillLevel" +
+            "experienceRequired, datePosted, status, description, employerID) VALUES (?)",
+            values   
+        )
+    })
+
+})
 app.listen(3001);
