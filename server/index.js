@@ -9,7 +9,6 @@ const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const e = require("express");
 
 app.use(express.json());
 
@@ -306,29 +305,33 @@ app.post("/employerEdit", (req,res) => {
 })
 
 app.post('/jobPosting', (req, res) => {
-    const jobID = req.body.jobID;
+    console.log(req.body)
     const jobName = req.body.jobName;
-    const jobCategory = req.body.jobCategory;
+    const jobCategory = req.body.category;
     const wage = req.body.wage;
-    const skillLevel = req.body.skillLevel;
-    const expRequired = req.body.experienceRequired;
-    const datePosted = req.body.datePosted;
-    const status = req.body.status;
+    const skillLevel = req.body.jobSkill;
+    const expRequired = req.body.jobExp;
+    const datePosted = req.body.date;
+    const status = req.body.jobStatus;
     const desc = req.body.description;
-    const empID = req.body.employerID;
+    const empID = req.body.empID;
 
     var values = [
-        [jobID, jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc, empID]
+        [jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc, empID]
     ];
 
-    console.log(values);
+    //console.log(values[0])
 
-    db.getConnection(function(err,connection){
-        db.query("INSERT INTO Job (jobID, jobName, jobCategory, wage, skillLevel" +
-            "experienceRequired, datePosted, status, description, employerID) VALUES (?)",
-            values   
-        )
-    })
-
+    db.query(
+        "INSERT INTO Job (jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description, employerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc, empID],   
+        (err, result) => {
+            if (err) {
+                throw err;
+            }else{
+                res.send("job inserted successfully")
+                console.log(result)
+            }
+        });
 })
 app.listen(3001);

@@ -25,7 +25,6 @@ import employerProfile from './views/EmployerProfile';
 import EjobPost from './views/EjobPost';
 import EcurrPosted from './views/EcurrPosted';
 import LoginBypass from './views/LoginBypass';
-import SjobPost from './views/SjobPost'
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -71,9 +70,8 @@ const App = () => {
           <AppRoute exact path="/StudentProfile" component={StudentProfile} layout={LayoutDefault} />
           <AppRoute exact path="/employerProfile" component={employerProfile} layout={LayoutDefault} />
           <AppRoute exact path="/myJobsPosted" component={EcurrPosted} layout={LayoutDefault} />
-          <AppRoute exact path="/newJobPosting" component={EjobPost} layout={LayoutDefault} />
+          <AppRoute exact path="/EjobPost" component={EjobPost} layout={LayoutDefault} />
           <AppRoute exact path="/Login/Bypass" component={LoginBypass} layout={LayoutDefault} />
-          <AppRoute exact path="/SjobPost" component={SjobPost} layout={LayoutDefault} />
 
         </Switch>
       )} />

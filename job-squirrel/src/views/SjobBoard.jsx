@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from "react-google-maps";
 import Geocode from "react-geocode";
-import * as addressData from "../data/address.json";
 import Axios from "axios";
 import Table from "./Table"
 import ButtonGroup from '../components/elements/ButtonGroup';
