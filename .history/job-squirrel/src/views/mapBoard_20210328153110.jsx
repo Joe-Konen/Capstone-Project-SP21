@@ -24,11 +24,27 @@ function Map(){
             //console.log(response.data)
         })
     }
+    const pushLatLng = () => {
+        Axios.post("http://localhost:3001/", {
+            username: usernameStu,
+            password: passwordStu,
+            school: schoolStu,
+            fName: fNameStu,
+            lName: lNameStu,
+            email: emailStu,
+            age: ageStu,
+        }).then((response) => {
+            console.log(response);
+            if(response.data == "edited"){
+                history.push("/HomeStudent");
+            };
+        });
+    }
 
     useEffect(() => {
         getAddress();
 
-    }, []) 
+    }, [])    
 
     useEffect(() => {
         address.map((a) => {
@@ -37,15 +53,6 @@ function Map(){
                 response => {
                     setLat(response.results[0].geometry.location.lat)
                     setLng(response.results[0].geometry.location.lng)
-
-                    
-                        Axios.post("http://localhost:3001/SjobBoard", {
-                            latitude: lat,
-                            longitude: lng
-                        }).then((response2) => {
-                            console.log("hellow" + response2);
-                        });
-                    
 
                     console.log(a.address)
                     

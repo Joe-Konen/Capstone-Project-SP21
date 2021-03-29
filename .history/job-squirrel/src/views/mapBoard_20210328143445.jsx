@@ -28,7 +28,7 @@ function Map(){
     useEffect(() => {
         getAddress();
 
-    }, []) 
+    }, [])    
 
     useEffect(() => {
         address.map((a) => {
@@ -37,15 +37,6 @@ function Map(){
                 response => {
                     setLat(response.results[0].geometry.location.lat)
                     setLng(response.results[0].geometry.location.lng)
-
-                    
-                        Axios.post("http://localhost:3001/SjobBoard", {
-                            latitude: lat,
-                            longitude: lng
-                        }).then((response2) => {
-                            console.log("hellow" + response2);
-                        });
-                    
 
                     console.log(a.address)
                     
@@ -74,8 +65,8 @@ function Map(){
             <Marker 
             key={a.employerID}
             position={{
-                lat: lat,
-                lng: lng
+                lat: locateLat[i],
+                lng: locateLng[i]
             }}
             onClick={()=>{
                 setSelectedAdd(a);
@@ -85,7 +76,7 @@ function Map(){
         ))}
         {selectedAdd &&(
             <InfoWindow
-            position={{lat:lat, lng:lng}}
+            position={{lat:locateLat[i], lng:lng}}
             onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>This is where Job info will be</div>
             </InfoWindow>

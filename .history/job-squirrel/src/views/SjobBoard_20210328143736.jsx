@@ -86,19 +86,18 @@ function SjobBoard() {
         </div>
         <div style={{paddingLeft: '15%', paddingBottom: '20px'}}className="reveal-from-bottom" data-reveal-delay="600">
         <ButtonGroup>
-            <Button tag="a" color="primary" wideMobile href="/mapBoard">
-            See it on a Map!
-            </Button>
-        </ButtonGroup>
-      </div>
-        <div style={{paddingLeft: '15%', paddingBottom: '20px'}}className="reveal-from-bottom" data-reveal-delay="600">
-        <ButtonGroup>
             <Button tag="a" color="primary" wideMobile href="/HomeStudent">
             Go Back
             </Button>
         </ButtonGroup>
       </div>
-     
+      <div style={{paddingLeft: '15%', paddingBottom: '20px'}}className="reveal-from-bottom" data-reveal-delay="600">
+        <ButtonGroup>
+            <Button tag="a" color="primary" wideMobile href="/">
+            Go Back
+            </Button>
+        </ButtonGroup>
+      </div>
       </body>
         
         // <div>

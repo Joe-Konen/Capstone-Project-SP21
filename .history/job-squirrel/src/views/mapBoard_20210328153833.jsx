@@ -43,7 +43,7 @@ function Map(){
                             latitude: lat,
                             longitude: lng
                         }).then((response2) => {
-                            console.log("hellow" + response2);
+                            console.log(response2);
                         });
                     
 

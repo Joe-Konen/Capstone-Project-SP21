@@ -29,6 +29,10 @@ function Map(){
         getAddress();
 
     }, []) 
+    
+    useEffect(()=>{
+        pushLatLng();
+    }, [])
 
     useEffect(() => {
         address.map((a) => {
@@ -38,12 +42,12 @@ function Map(){
                     setLat(response.results[0].geometry.location.lat)
                     setLng(response.results[0].geometry.location.lng)
 
-                    
+                    const pushLatLng = () => {
                         Axios.post("http://localhost:3001/SjobBoard", {
                             latitude: lat,
                             longitude: lng
                         }).then((response2) => {
-                            console.log("hellow" + response2);
+                            console.log(response2);
                         });
                     
 

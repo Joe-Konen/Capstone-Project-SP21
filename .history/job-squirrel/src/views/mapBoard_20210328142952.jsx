@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Component} from "react";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from "react-google-maps";
 import Geocode from "react-geocode";
 import Axios from "axios";
@@ -6,8 +6,18 @@ import Axios from "axios";
 Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 
 
-function Map(){
-
+class Map extends Components{
+    constructor(props) {
+        super(props);
+        this.state = {
+          markers: [],
+          lat: null,
+          lng: null,
+          showingInfoWindow: false,
+          activeMarker: {},
+          selectedPlace: {}
+        };
+      }
     const [address, setAddress] = useState([]);
     const [employerID, setEmployerID] = useState([]);
     const [lat, setLat] = useState(0);
@@ -28,7 +38,7 @@ function Map(){
     useEffect(() => {
         getAddress();
 
-    }, []) 
+    }, [])    
 
     useEffect(() => {
         address.map((a) => {
@@ -37,15 +47,6 @@ function Map(){
                 response => {
                     setLat(response.results[0].geometry.location.lat)
                     setLng(response.results[0].geometry.location.lng)
-
-                    
-                        Axios.post("http://localhost:3001/SjobBoard", {
-                            latitude: lat,
-                            longitude: lng
-                        }).then((response2) => {
-                            console.log("hellow" + response2);
-                        });
-                    
 
                     console.log(a.address)
                     
@@ -70,9 +71,8 @@ function Map(){
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a, i)=>(
+        {address.map((a)=>(
             <Marker 
-            key={a.employerID}
             position={{
                 lat: lat,
                 lng: lng

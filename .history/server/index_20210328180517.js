@@ -204,14 +204,13 @@ app.get("/SjobBoard", (req,res)=>{
 app.post("/SjobBoard", (req,res)=>{
     const latitude = req.body.latitude;
     const longitude = req.body.longitude;
-    var values = [latitude, longitude];
+    var value = [latitude, longitude]
     
-    db.query(
-        "UPDATE Employer SET latitude = ?, longitude = ? WHERE latitude = null AND longitude = null",
-        values,
-        function(err, rows, fields){
-            if (err) throw err;
-        });
+    db.query("UPDATE employer SET latitude = ?, longitude = ? WHERE lattitude = null AND longitude = null", values),
+        (err2,result)=>{
+           res.send(result)
+           if(err2) throw err2
+    })
 })
 
 app.get("/JobBoard", (req, res) => {

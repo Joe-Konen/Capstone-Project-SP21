@@ -9,7 +9,7 @@ Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 function Map(){
 
     const [address, setAddress] = useState([]);
-    const [employerID, setEmployerID] = useState([]);
+    //const [employerID, setEmployerID] = useState([]);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
     const [selectedAdd, setSelectedAdd] = useState(null);
@@ -28,7 +28,7 @@ function Map(){
     useEffect(() => {
         getAddress();
 
-    }, []) 
+    }, [])    
 
     useEffect(() => {
         address.map((a) => {
@@ -37,15 +37,6 @@ function Map(){
                 response => {
                     setLat(response.results[0].geometry.location.lat)
                     setLng(response.results[0].geometry.location.lng)
-
-                    
-                        Axios.post("http://localhost:3001/SjobBoard", {
-                            latitude: lat,
-                            longitude: lng
-                        }).then((response2) => {
-                            console.log("hellow" + response2);
-                        });
-                    
 
                     console.log(a.address)
                     
@@ -70,9 +61,8 @@ function Map(){
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a, i)=>(
+        {address.map((a)=>(
             <Marker 
-            key={a.employerID}
             position={{
                 lat: lat,
                 lng: lng
