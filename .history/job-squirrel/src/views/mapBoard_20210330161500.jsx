@@ -24,21 +24,21 @@ function Map(){
             //console.log(response.data)
         })
     }
-    const setLatLng = () => {
-        for(var i = 0; i < address.length; i++){
-            Axios.post("http://localhost:3001/SjobBoard", {
-                latitude: locateLat[i],
-                longitude: locateLng[i],
-            }).then((response2) => {
-                console.log("F1" + response2);
-        });
-        }
-    }
+    // const setLatLng = () => {
+    //     for(var i = 0; i < address.length; i++){
+    //         Axios.post("http://localhost:3001/SjobBoard", {
+    //             latitude: lat,
+    //             longitude: lng,
+    //         }).then((response2) => {
+    //             console.log("F1" + response2);
+    //     });
+    //     }
+    // }
 
-    useEffect(()=>{
-        setLatLng();
+    // useEffect(()=>{
+    //     setLatLng();
         
-    }, [address])
+    // }, [address])
 
     useEffect(() => {
         getAddress();
@@ -71,8 +71,8 @@ function Map(){
                     locateLng.push(response.results[0].geometry.location.lng)
                     setLocateLat(arr => [...arr])
                     setLocateLng(arr => [...arr])
-                    console.log(locateLat)
-                    console.log(locateLng)
+                    //console.log(locateLat)
+                    //console.log(locateLng)
 
                 }
             )
@@ -81,7 +81,15 @@ function Map(){
         
     }, [address])
 
-
+    for(var j = 0; j < locateLat.length; j++){
+        console.log(locateLat[j] + " " + locateLng[j])
+        Axios.post("http://localhost:3001/SjobBoard", {
+                latitude: locateLat[j],
+                longitude: locateLng[j]
+            }).then((response2) => {
+                console.log("F1" + response2);
+        });
+    }
     
     return(
                 

@@ -24,21 +24,21 @@ function Map(){
             //console.log(response.data)
         })
     }
-    const setLatLng = () => {
-        for(var i = 0; i < address.length; i++){
-            Axios.post("http://localhost:3001/SjobBoard", {
-                latitude: locateLat[i],
-                longitude: locateLng[i],
-            }).then((response2) => {
-                console.log("F1" + response2);
-        });
-        }
-    }
+    // const setLatLng = () => {
+    //     for(var i = 0; i < address.length; i++){
+    //         Axios.post("http://localhost:3001/SjobBoard", {
+    //             latitude: lat,
+    //             longitude: lng,
+    //         }).then((response2) => {
+    //             console.log("F1" + response2);
+    //     });
+    //     }
+    // }
 
-    useEffect(()=>{
-        setLatLng();
+    // useEffect(()=>{
+    //     setLatLng();
         
-    }, [address])
+    // }, [address])
 
     useEffect(() => {
         getAddress();
@@ -54,12 +54,12 @@ function Map(){
                     setLng(response.results[0].geometry.location.lng)
 
                     
-                        // Axios.post("http://localhost:3001/SjobBoard", {
-                        //     latitude: response.results[0].geometry.location.lat,
-                        //     longitude: response.results[0].geometry.location.lng
-                        // }).then((response2) => {
-                        //     console.log("F1" + response2);
-                        // });
+                        Axios.post("http://localhost:3001/SjobBoard", {
+                            latitude: response.results[0].geometry.location.lat,
+                            longitude: response.results[0].geometry.location.lng
+                        }).then((response2) => {
+                            console.log("F1" + response2);
+                        });
                     
 
                     console.log(a.address)
@@ -72,7 +72,7 @@ function Map(){
                     setLocateLat(arr => [...arr])
                     setLocateLng(arr => [...arr])
                     console.log(locateLat)
-                    console.log(locateLng)
+                    //console.log(locateLng)
 
                 }
             )
@@ -80,8 +80,6 @@ function Map(){
         })
         
     }, [address])
-
-
     
     return(
                 

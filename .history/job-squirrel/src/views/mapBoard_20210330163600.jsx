@@ -27,18 +27,18 @@ function Map(){
     const setLatLng = () => {
         for(var i = 0; i < address.length; i++){
             Axios.post("http://localhost:3001/SjobBoard", {
-                latitude: locateLat[i],
-                longitude: locateLng[i],
+                latitude: ,
+                longitude: lng,
             }).then((response2) => {
                 console.log("F1" + response2);
         });
         }
     }
 
-    useEffect(()=>{
-        setLatLng();
+    // useEffect(()=>{
+    //     setLatLng();
         
-    }, [address])
+    // }, [address])
 
     useEffect(() => {
         getAddress();

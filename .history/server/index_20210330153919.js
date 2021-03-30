@@ -207,7 +207,7 @@ app.post("/SjobBoard", (req,res)=>{
     var values = [latitude, longitude];
     
     db.query(
-        "UPDATE Employer SET latitude = ?, longitude = ? WHERE latitude = 0 AND longitude = 0",
+        "UPDATE Employer SET latitude = ?, longitude = (?) WHERE latitude = 0 AND longitude = 0",
         values,
         function(err, rows, fields){
             if (err) throw err;

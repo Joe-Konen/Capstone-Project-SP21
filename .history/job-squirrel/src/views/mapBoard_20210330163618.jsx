@@ -28,7 +28,7 @@ function Map(){
         for(var i = 0; i < address.length; i++){
             Axios.post("http://localhost:3001/SjobBoard", {
                 latitude: locateLat[i],
-                longitude: locateLng[i],
+                longitude: locateLng,
             }).then((response2) => {
                 console.log("F1" + response2);
         });
