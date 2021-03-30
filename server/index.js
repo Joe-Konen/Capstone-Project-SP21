@@ -193,7 +193,7 @@ app.post("/Login", (req, res) => {
 app.get("/SjobBoard", (req,res)=>{
     //const address  = req.body.address;
     db.getConnection(function(err,connection){
-        db.query("SELECT address, employerID FROM Employer",
+        db.query("SELECT address, employerID, latitude, longitude FROM Employer",
             (err2,result)=>{
                 res.send(result)
                 if(err2) throw err2
@@ -207,10 +207,11 @@ app.post("/SjobBoard", (req,res)=>{
     var values = [latitude, longitude];
     
     db.query(
-        "UPDATE Employer SET latitude = ?, longitude = ? WHERE latitude = null AND longitude = null",
+        "UPDATE Employer SET latitude = (?), longitude = (?) WHERE latitude = NULL AND longitude = NULL",
         values,
         function(err, rows, fields){
             if (err) throw err;
+            console.log(values)
         });
 })
 

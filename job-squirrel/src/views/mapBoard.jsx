@@ -24,6 +24,21 @@ function Map(){
             //console.log(response.data)
         })
     }
+    // const setLatLng = () => {
+    //     for(var i = 0; i < address.length; i++){
+    //         Axios.post("http://localhost:3001/SjobBoard", {
+    //             latitude: lat,
+    //             longitude: lng,
+    //         }).then((response2) => {
+    //             console.log("F1" + response2);
+    //     });
+    //     }
+    // }
+
+    // useEffect(()=>{
+    //     setLatLng();
+        
+    // }, [address])
 
     useEffect(() => {
         getAddress();
@@ -40,10 +55,10 @@ function Map(){
 
                     
                         Axios.post("http://localhost:3001/SjobBoard", {
-                            latitude: lat,
-                            longitude: lng
+                            latitude: response.results[0].geometry.location.lat,
+                            longitude: response.results[0].geometry.location.lng
                         }).then((response2) => {
-                            console.log("hellow" + response2);
+                            console.log("F1" + response2);
                         });
                     
 
