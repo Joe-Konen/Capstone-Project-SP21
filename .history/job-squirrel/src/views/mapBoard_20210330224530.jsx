@@ -35,7 +35,7 @@ function Map(){
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a)=>(
+        {address.map((a, i)=>(
             <Marker 
             key={a.employerID}
             position={{
@@ -49,9 +49,9 @@ function Map(){
 
         ))}
         {selectedAdd &&(
-            address.map((a, i)=>(
+            address.map((a)=>(
                 <InfoWindow
-                    position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude)}}
+                    position={{lat: parseFloat(a.latitude, lng: a.longitude}}
                     onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>This is where Job info will be</div>
             </InfoWindow>

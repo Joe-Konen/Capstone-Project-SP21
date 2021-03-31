@@ -39,7 +39,7 @@ function RegisterEmployer() {
                 longitude: response.results[0].geometry.location.lng,
             }).then((response2) => {
                 console.log(response2);
-                if(response2.data == "registered"){
+                if(response.data == "registered"){
                 history.push("/HomeEmployer");
                 }
             })

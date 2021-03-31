@@ -24,23 +24,73 @@ function Map(){
             //console.log(response.data)
         })
     }
+    // const setLatLng = () => {
+    //     for(var i = 0; i < address.length; i++){
+    //         Axios.post("http://localhost:3001/SjobBoard", {
+    //             latitude: lat,
+    //             longitude: lng,
+    //         }).then((response2) => {
+    //             console.log("F1" + response2);
+    //     });
+    //     }
+    // }
+
+    // useEffect(()=>{
+    //     setLatLng();
+        
+    // }, [address])
 
     useEffect(() => {
         getAddress();
 
     }, []) 
 
+    useEffect(() => {
+        address.map((a) => {
+            // console.log(a.address)
+            Geocode.fromAddress(a.address).then(
+                response => {
+                    setLat(response.results[0].geometry.location.lat)
+                    setLng(response.results[0].geometry.location.lng)
+
+                    
+                        // Axios.post("http://localhost:3001/SjobBoard", {
+                        //     latitude: response.results[0].geometry.location.lat,
+                        //     longitude: response.results[0].geometry.location.lng
+                        // }).then((response2) => {
+                        //     console.log("F1" + response2);
+                        // });
+                    
+
+                    console.log(a.address)
+                    
+                    // console.log(response.results[0].geometry.location.lat)
+                    // console.log(response.results[0].geometry.location.lng)
+
+                    locateLat.push(response.results[0].geometry.location.lat)
+                    locateLng.push(response.results[0].geometry.location.lng)
+                    setLocateLat(arr => [...arr])
+                    setLocateLng(arr => [...arr])
+                    console.log(locateLat)
+                    console.log(locateLng)
+
+                }
+            )
+            
+        })
+        
+    }, [address])
     
     return(
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a)=>(
+        {address.map((a, i)=>(
             <Marker 
             key={a.employerID}
             position={{
-                lat: parseFloat(a.latitude),
-                lng: parseFloat(a.longitude)
+                lat: lat,
+                lng: lng
             }}
             onClick={()=>{
                 setSelectedAdd(a);
@@ -49,13 +99,11 @@ function Map(){
 
         ))}
         {selectedAdd &&(
-            address.map((a, i)=>(
-                <InfoWindow
-                    position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude)}}
-                    onCloseClick={()=>{setSelectedAdd(null)}}>
+            <InfoWindow
+            position={{lat:lat, lng:lng}}
+            onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>This is where Job info will be</div>
             </InfoWindow>
-            ))
         )}
         {/* <div>
         {address.map((a) => (

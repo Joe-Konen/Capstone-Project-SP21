@@ -51,7 +51,7 @@ function Map(){
         {selectedAdd &&(
             address.map((a, i)=>(
                 <InfoWindow
-                    position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude)}}
+                    position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude[i])}}
                     onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>This is where Job info will be</div>
             </InfoWindow>

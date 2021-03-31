@@ -201,6 +201,19 @@ app.get("/SjobBoard", (req,res)=>{
         })
 })
 
+app.post("/SjobBoard", (req,res)=>{
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude;
+    var values = [latitude, longitude];
+    
+    db.query(
+        "UPDATE Employer SET latitude = ?, longitude = ? WHERE latitude = 'null' AND longitude = 'null'",
+        values,
+        function(err, rows, fields){
+            if (err) throw err;
+            console.log(values)
+        });
+})
 
 app.get("/JobBoard", (req, res) => {
 
@@ -256,17 +269,16 @@ app.post("/employerRegister", (req, res) => {
     const empAddress = req.body.address;
     //const phone = req.body.phone;
     const empEmail = req.body.email;
-    const latitude = req.body.latitude;
-    const longitude = req.body.longitude;
+    const latitude = req.body.
     
     var values = [
-        [empFName, empLName, empAddress, empEmail, empPassword, empUsername, latitude, longitude]
+        [empFName, empLName, empAddress, empEmail, empPassword, empUsername]
     ];
     
     console.log(values[0]);
     
     db.query(
-        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username, latitude, longitude) VALUES (?)",
+        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username) VALUES (?)",
         values,
         function(err, rows, fields){
             if (err) throw err;

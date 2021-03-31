@@ -13,8 +13,8 @@ function RegisterEmployer() {
   const [fNameReg, setFirstName] = useState("");
   const [lNameReg, setLastName] = useState("");
   const [emailReg, setEmail] = useState("");
-  //const [lat, setLat] = useState("");
-  //const [lng, setLng] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
 
   
   const history = useHistory();
@@ -33,16 +33,16 @@ function RegisterEmployer() {
                 address: addressReg,
                 phone: phoneNumReg,
                 fName: fNameReg,
-                lName: lNameReg,
-                email: emailReg,
-                latitude: response.results[0].geometry.location.lat,
-                longitude: response.results[0].geometry.location.lng,
-            }).then((response2) => {
-                console.log(response2);
-                if(response2.data == "registered"){
-                history.push("/HomeEmployer");
-                }
-            })
+             lName: lNameReg,
+        email: emailReg,
+        latitude: lat,
+        longitude: lng,
+      }).then((response2) => {
+        console.log(response2);
+        if(response.data == "registered"){
+            history.push("/HomeEmployer");
+        }
+      })
         })
     
     }

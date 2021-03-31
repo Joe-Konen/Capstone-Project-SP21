@@ -9,12 +9,9 @@ Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 function Map(){
 
     const [address, setAddress] = useState([]);
-    const [employerID, setEmployerID] = useState([]);
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
+    //const [employerID, setEmployerID] = useState([]);
     const [selectedAdd, setSelectedAdd] = useState(null);
-    const [locateLat, setLocateLat] = useState([]);
-    const [locateLng, setLocateLng] = useState([]);
+
 
     
     const getAddress = () => {
@@ -24,6 +21,7 @@ function Map(){
             //console.log(response.data)
         })
     }
+
 
     useEffect(() => {
         getAddress();
@@ -35,12 +33,12 @@ function Map(){
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a)=>(
+        {address.map((a, i)=>(
             <Marker 
             key={a.employerID}
             position={{
-                lat: parseFloat(a.latitude),
-                lng: parseFloat(a.longitude)
+                lat: a.latitude,
+                lng: a.longitude
             }}
             onClick={()=>{
                 setSelectedAdd(a);
@@ -49,13 +47,11 @@ function Map(){
 
         ))}
         {selectedAdd &&(
-            address.map((a, i)=>(
-                <InfoWindow
-                    position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude)}}
-                    onCloseClick={()=>{setSelectedAdd(null)}}>
+            <InfoWindow
+            position={{lat:a.latitude, lng:a.longitude}}
+            onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>This is where Job info will be</div>
             </InfoWindow>
-            ))
         )}
         {/* <div>
         {address.map((a) => (

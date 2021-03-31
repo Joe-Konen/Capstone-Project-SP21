@@ -202,6 +202,7 @@ app.get("/SjobBoard", (req,res)=>{
 })
 
 
+
 app.get("/JobBoard", (req, res) => {
 
     db.getConnection(function(err, connection){

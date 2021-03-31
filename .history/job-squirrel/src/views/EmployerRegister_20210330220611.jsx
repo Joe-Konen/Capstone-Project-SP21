@@ -13,8 +13,8 @@ function RegisterEmployer() {
   const [fNameReg, setFirstName] = useState("");
   const [lNameReg, setLastName] = useState("");
   const [emailReg, setEmail] = useState("");
-  //const [lat, setLat] = useState("");
-  //const [lng, setLng] = useState("");
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
 
   
   const history = useHistory();
@@ -23,28 +23,60 @@ function RegisterEmployer() {
     let path = 'Login';
     history.push(path);
     }
+
+    const register = () = {
+        Geocode.fromAddress(addressReg).then(
+            response => {
+                setLat(response.results[0].geometry.location.lat)
+                setLng(response.results[0].geometry.location.lng)
+                console.log(response.results[0].geometry.location.lat)
+                console.log(response.results[0].geometry.location.lng)
+                Axios.post("http://localhost:3001/employerRegister", {
+                    username: usernameReg,
+                    password: passwordReg,
+                    address: addressReg,
+                    phone: phoneNumReg,
+                    fName: fNameReg,
+                    lName: lNameReg,
+                    email: emailReg,
+        latitude: lat,
+        longitude: lng,
+      }).then((response) => {
+        console.log(response);
+        if(response.data == "registered"){
+            history.push("/HomeEmployer");
+        }
+      })
+            })
+    }
+
+
   
   const employerRegister = () => {
-    Geocode.fromAddress(addressReg).then(
+      Axios.post("http://localhost:3001/employerRegister", {
+        username: usernameReg,
+        password: passwordReg,
+        address: addressReg,
+        phone: phoneNumReg,
+        fName: fNameReg,
+        lName: lNameReg,
+        email: emailReg,
+        latitude: lat,
+        longitude: lng,
+      }).then((response) => {
+        console.log(response);
+        if(response.data == "registered"){
+            history.push("/HomeEmployer");
+        }
+      })
+      Geocode.fromAddress(addressReg).then(
         response => {
-            Axios.post("http://localhost:3001/employerRegister", {
-                username: usernameReg,
-                password: passwordReg,
-                address: addressReg,
-                phone: phoneNumReg,
-                fName: fNameReg,
-                lName: lNameReg,
-                email: emailReg,
-                latitude: response.results[0].geometry.location.lat,
-                longitude: response.results[0].geometry.location.lng,
-            }).then((response2) => {
-                console.log(response2);
-                if(response2.data == "registered"){
-                history.push("/HomeEmployer");
-                }
-            })
+            setLat(response.results[0].geometry.location.lat)
+            setLng(response.results[0].geometry.location.lng)
+            console.log(response.results[0].geometry.location.lat)
+            console.log(response.results[0].geometry.location.lng)
         })
-    
+      
     }
     return (
         <div className="Login">

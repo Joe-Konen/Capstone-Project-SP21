@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import Axios from "axios";
 import "./stylesheets/Style.css";
 import {useHistory} from "react-router-dom";
-import Geocode from "react-geocode";
-Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 
 function RegisterEmployer() {
   const [usernameReg, setUsername] = useState("");
@@ -13,9 +11,8 @@ function RegisterEmployer() {
   const [fNameReg, setFirstName] = useState("");
   const [lNameReg, setLastName] = useState("");
   const [emailReg, setEmail] = useState("");
-  //const [lat, setLat] = useState("");
-  //const [lng, setLng] = useState("");
-
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
   
   const history = useHistory();
   
@@ -23,28 +20,73 @@ function RegisterEmployer() {
     let path = 'Login';
     history.push(path);
     }
+
+    const getAddress = () => {
+        Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
+            setAddress(response.data)
+            setEmployerID(response.data.employerID)
+            //console.log(response.data)
+        })
+    }
+
+    useEffect(() => {
+        getAddress();
+
+    }, []) 
+
+    useEffect(() => {
+        address.map((a) => {
+            // console.log(a.address)
+            Geocode.fromAddress(a.address).then(
+                response => {
+                    setLat(response.results[0].geometry.location.lat)
+                    setLng(response.results[0].geometry.location.lng)
+
+                    
+                        Axios.post("http://localhost:3001/SjobBoard", {
+                            latitude: response.results[0].geometry.location.lat,
+                            longitude: response.results[0].geometry.location.lng
+                        }).then((response2) => {
+                            console.log("F1" + response2);
+                        });
+                    
+
+                    console.log(a.address)
+                    
+                    // console.log(response.results[0].geometry.location.lat)
+                    // console.log(response.results[0].geometry.location.lng)
+
+                    locateLat.push(response.results[0].geometry.location.lat)
+                    locateLng.push(response.results[0].geometry.location.lng)
+                    setLocateLat(arr => [...arr])
+                    setLocateLng(arr => [...arr])
+                    console.log(locateLat)
+                    console.log(locateLng)
+
+                }
+            )
+            
+        })
+        
+    }, [address])
   
   const employerRegister = () => {
-    Geocode.fromAddress(addressReg).then(
-        response => {
-            Axios.post("http://localhost:3001/employerRegister", {
-                username: usernameReg,
-                password: passwordReg,
-                address: addressReg,
-                phone: phoneNumReg,
-                fName: fNameReg,
-                lName: lNameReg,
-                email: emailReg,
-                latitude: response.results[0].geometry.location.lat,
-                longitude: response.results[0].geometry.location.lng,
-            }).then((response2) => {
-                console.log(response2);
-                if(response2.data == "registered"){
-                history.push("/HomeEmployer");
-                }
-            })
-        })
-    
+      Axios.post("http://localhost:3001/employerRegister", {
+        username: usernameReg,
+        password: passwordReg,
+        address: addressReg,
+        phone: phoneNumReg,
+        fName: fNameReg,
+        lName: lNameReg,
+        email: emailReg,
+        latitude: longitude,
+        l
+      }).then((response) => {
+        console.log(response);
+        if(response.data == "registered"){
+            history.push("/HomeEmployer");
+        };
+      });
     }
     return (
         <div className="Login">

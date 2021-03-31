@@ -24,23 +24,17 @@ function Map(){
             //console.log(response.data)
         })
     }
-
-    useEffect(() => {
-        getAddress();
-
-    }, []) 
-
     
     return(
                 
         <GoogleMap defaultZoom={10} defaultCenter={{lat: 41.754468, lng: -88.348941}}>
 
-        {address.map((a)=>(
+        {address.map((a, i)=>(
             <Marker 
             key={a.employerID}
             position={{
-                lat: parseFloat(a.latitude),
-                lng: parseFloat(a.longitude)
+                lat: lat,
+                lng: lng
             }}
             onClick={()=>{
                 setSelectedAdd(a);
@@ -49,13 +43,11 @@ function Map(){
 
         ))}
         {selectedAdd &&(
-            address.map((a, i)=>(
-                <InfoWindow
-                    position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude)}}
-                    onCloseClick={()=>{setSelectedAdd(null)}}>
+            <InfoWindow
+            position={{lat:lat, lng:lng}}
+            onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>This is where Job info will be</div>
             </InfoWindow>
-            ))
         )}
         {/* <div>
         {address.map((a) => (

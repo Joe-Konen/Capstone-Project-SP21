@@ -49,7 +49,7 @@ function Map(){
 
         ))}
         {selectedAdd &&(
-            address.map((a, i)=>(
+            address.map((a,)=>(
                 <InfoWindow
                     position={{lat: parseFloat(a.latitude), lng: parseFloat(a.longitude)}}
                     onCloseClick={()=>{setSelectedAdd(null)}}>
