@@ -31,3 +31,12 @@ div.Register {
     width: 500px !important;
   }
 /*End of Registration Pages*/
+
+/*Job Posting Page*/
+
+div.Instructions {
+  text-align: center;
+  font-size: 17px;
+  padding-bottom: 30px;
+}
+
