@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./stylesheets/Style.css";
 import Axios from 'axios';
 
@@ -13,6 +13,7 @@ function EjobPost() {
     const [status, setStatus] = useState(0)
     const [desc, setDesc] = useState("")
     const [empID, setEmpID] = useState("")
+    const history = useHistory();
 
     const postJob = () => {
         console.log(jCat)
@@ -32,10 +33,10 @@ function EjobPost() {
 
     }
 
-    // const routeChange = () => {
-    //     let path = 'HomeEmployer';
-    //     history.push(path);
-    // }
+    const routeChange = () => {
+        let path = 'HomeEmployer';
+        history.push(path);
+    }
     return (
         <div>  
             <h1 style={{textAlign: 'center', padding: '30px'}}>Post a new job here</h1>
@@ -120,7 +121,7 @@ function EjobPost() {
                         setDesc(e.target.value);
                     }}/>
 
-                {/* <button className="backButton" onClick={routeChange}>Cancel</button> */}
+                <button className="backButton" onClick={routeChange}>Cancel</button>
                 <button onClick={postJob}> Post</button>
             </div>   
         </div>
