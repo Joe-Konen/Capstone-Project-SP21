@@ -201,19 +201,6 @@ app.get("/SjobBoard", (req,res)=>{
         })
 })
 
-app.post("/SjobBoard", (req,res)=>{
-    const latitude = req.body.latitude;
-    const longitude = req.body.longitude;
-    var values = [latitude, longitude];
-    
-    db.query(
-        "UPDATE Employer SET latitude = ?, longitude = ? WHERE latitude = 0 AND longitude = 0",
-        values,
-        function(err, rows, fields){
-            if (err) throw err;
-            console.log(values)
-        });
-})
 
 app.get("/JobBoard", (req, res) => {
 
@@ -269,22 +256,28 @@ app.post("/employerRegister", (req, res) => {
     const empAddress = req.body.address;
     //const phone = req.body.phone;
     const empEmail = req.body.email;
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude;
     
     var values = [
-        [empFName, empLName, empAddress, empEmail, empPassword, empUsername]
+        [empFName, empLName, empAddress, empEmail, empPassword, empUsername, latitude, longitude]
     ];
     
-    console.log(values[0]);
+    console.log("The result: ",values[0]);
     
     db.query(
-        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username) VALUES (?)",
+        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username, latitude, longitude) VALUES (?)",
         values,
-        function(err, rows, fields){
+        function(err, rows, result){
             if (err) throw err;
+            
         });
         
         res.send("registered")
 })
+
+
+
 
 app.post("/employerEdit", (req,res) => {
     const empUsername = req.body.username;

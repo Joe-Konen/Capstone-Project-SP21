@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import Axios from "axios";
 import "./stylesheets/Style.css";
 import {useHistory} from "react-router-dom";
+import Geocode from "react-geocode";
+Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 
 function RegisterEmployer() {
   const [usernameReg, setUsername] = useState("");
@@ -11,6 +13,8 @@ function RegisterEmployer() {
   const [fNameReg, setFirstName] = useState("");
   const [lNameReg, setLastName] = useState("");
   const [emailReg, setEmail] = useState("");
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
   
   const history = useHistory();
   
@@ -19,6 +23,16 @@ function RegisterEmployer() {
     history.push(path);
     }
   
+    const getCoords = () => {
+        Geocode.fromAddress(addressReg).then(
+            response => {
+                setLat(response.results[0].geometry.location.lat)
+                setLng(response.results[0].geometry.location.lng)
+                console.log(response.results[0].geometry.location.lat)
+                console.log(response.results[0].geometry.location.lng)
+            }
+        )
+    }
   const employerRegister = () => {
       Axios.post("http://localhost:3001/employerRegister", {
         username: usernameReg,
@@ -28,12 +42,25 @@ function RegisterEmployer() {
         fName: fNameReg,
         lName: lNameReg,
         email: emailReg,
+        latitude: lat,
+        longitude: lng,
+        
       }).then((response) => {
         console.log(response);
+        
         if(response.data == "registered"){
             history.push("/HomeEmployer");
-        };
-      });
+        }
+      })
+    //   Geocode.fromAddress(addressReg).then(
+    //     response => {
+    //         setLat(response.results[0].geometry.location.lat)
+    //         setLng(response.results[0].geometry.location.lng)
+    //         console.log(response.results[0].geometry.location.lat)
+    //         console.log(response.results[0].geometry.location.lng)
+    //     }
+    // )
+     
     }
     return (
         <div className="Login">
@@ -97,8 +124,7 @@ function RegisterEmployer() {
                     className="form-input"
                     id = "address"
                     onChange={(e) => {
-                        setAddress(e.target.value);
-                    }}
+                        setAddress(e.target.value)}}
                     required
                     />
                     <label for="phoneNum">Phone Number: </label>
