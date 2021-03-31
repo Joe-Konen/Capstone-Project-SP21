@@ -6,20 +6,18 @@ function About() {
       <div class="container">
         <div class="row align-items-center my-5">
           <div class="col-lg-7">
-            <img
-              class="img-fluid rounded mb-4 mb-lg-0"
-              src="http://placehold.it/900x400"
-              alt=""
-            />
+            
+          </div>
+          <div>
+           <p> </p>
           </div>
           <div class="col-lg-5">
             <h1 class="font-weight-light">About</h1>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
+              Jobsquirrel was created in the spring of 2021 by a group of 4 computer science majors at Aurora University, a small private University in Aurora Illinois. The app was created as a project in CSC4990 Computer Science Capstone as a way to culminate the efforts of each members learning prior to graduation. The group members were Joe Konen, Vanessa Gill, Brandon Thezan, and Mason Conroy under the instruction of Professor David Lash.
+
             </p>
+            <p>The application is written using Javascript, HTML, and CSS and is supported by a mySQL database. Frameworks that were used on the app are Node.JS, React.JS, Express, and more.</p>
           </div>
         </div>
       </div>

@@ -1,16 +1,17 @@
-import React, {useState} from "react";
+import React, {Component, useState} from "react";
 import './stylesheets/Style.css';
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import ButtonGroup from '../components/elements/ButtonGroup';
+import Button from '../components/elements/Button';
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const history = useHistory();
-
-  Axios.defaults.withCredentials = true;
+const history = useHistory();
+Axios.defaults.withCredentials = true;
   
   const login = () => {
       Axios.post("http://localhost:3001/Login",{
@@ -43,11 +44,18 @@ function Login() {
 
     return (
 
-        <div className="Login">
+        <div className="container-xs">
         <div className="register">
             <h1>Need to register?</h1>
-            <button className="help">I'm looking for help</button>
-            <button className="work">I'm looking for work</button>
+            <ButtonGroup>
+                <Button tag="a" color="primary" wideMobile href="StudentRegister">
+                I'm looking for work
+                </Button>
+                <Button tag="a" color="primary" wideMobile href="EmployerRegister">
+                I'm looking for help
+                </Button>
+            </ButtonGroup>        
+
         </div>
         <div className="login">
             <form onSubmit={handleSubmit}>
@@ -56,23 +64,32 @@ function Login() {
             {(error != "") ? (<div className="error">{error}</div>) : ""}
             <input type="text"
             placeholder="username"
+            className="form-input"
             onChange={(e) => {
                 setUsername(e.target.value);
             }}
             />
             <input type="password"
             placeholder="password"
+            className="form-input"
             onChange={(e) => {
                 setPassword(e.target.value);
             }}
             />
-            <button onClick={login} type="submit" 
-                    className="loginButton" >Login</button>
+            <div className="reveal-from-bottom" data-reveal-delay="600">
+                <ButtonGroup>
+                    <Button tag="a" color="primary" onClick={login}>
+                    Login
+                    </Button>
+                    <Button tag="a" color="primary" wideMobile href="/">
+                    Cancel
+                    </Button>
+                </ButtonGroup>
+              </div>
             </form>
         </div>
         
     </div>
 );
 }
-
 export default Login;

@@ -11,14 +11,14 @@ function RegisterEmployer() {
   const [fNameReg, setFirstName] = useState("");
   const [lNameReg, setLastName] = useState("");
   const [emailReg, setEmail] = useState("");
-
+  
   const history = useHistory();
-
+  
   const routeChange = () => {
     let path = 'Login';
     history.push(path);
     }
-
+  
   const employerRegister = () => {
       Axios.post("http://localhost:3001/employerRegister", {
         username: usernameReg,
@@ -44,6 +44,7 @@ function RegisterEmployer() {
                     <label for="fName">First Name: </label>
                     <input type="text"
                     placeholder="First Name"
+                    className="form-input"
                     id = "fName"
                     onChange={(e) => {
                         setFirstName(e.target.value);
@@ -53,6 +54,7 @@ function RegisterEmployer() {
                     <label for="lName">Last Name: </label>
                     <input type="text"
                     placeholder="Last Name"
+                    className="form-input"
                     id = "lName"
                     onChange={(e) => {
                         setLastName(e.target.value);
@@ -62,6 +64,7 @@ function RegisterEmployer() {
                     <label for="user">Username: </label>
                     <input type="text"
                     placeholder="username"
+                    className="form-input"
                     id = "user"
                     onChange={(e) => {
                         setUsername(e.target.value);
@@ -71,6 +74,7 @@ function RegisterEmployer() {
                     <label for="password">Password: </label>
                     <input type="password"
                     placeholder="password"
+                    className="form-input"
                     id = "password"
                     onChange={(e) => {
                         setPassword(e.target.value);
@@ -80,6 +84,7 @@ function RegisterEmployer() {
                     <label for="email">Email: </label>
                     <input type="text"
                     placeholder="Email"
+                    className="form-input"
                     id = "email"
                     onChange={(e) => {
                         setEmail(e.target.value);
@@ -89,6 +94,7 @@ function RegisterEmployer() {
                     <label for="address">Address: </label>
                     <input type="text"
                     placeholder="address"
+                    className="form-input"
                     id = "address"
                     onChange={(e) => {
                         setAddress(e.target.value);
@@ -98,14 +104,16 @@ function RegisterEmployer() {
                     <label for="phoneNum">Phone Number: </label>
                     <input type="text"
                     placeholder="phone number"
+                    className="form-input"
                     id = "phoneNum"
                     onChange={(e) => {
                         setPhone(e.target.value);
                     }}
                     required
                     />
-                    <button className="backButton" onClick={routeChange}>Cancel</button>
-                    <button onClick={employerRegister}>Register</button>
+                    <button className="button button-primary button-wide-mobile" onClick={routeChange}>Cancel</button>
+                    <button onClick={employerRegister} type="submit"
+                        className="button button-primary button-wide-mobile">Register</button>
                 </div>
         </div>
     );

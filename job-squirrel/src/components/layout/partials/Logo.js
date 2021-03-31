@@ -19,13 +19,13 @@ const Logo = ({
       className={classes}
     >
       <h1 className="m-0">
-        <Link to="/">
+        
           <Image
             src={require('./../../../assets/images/SquirrelLogo.png')}
             alt="Open"
             width={42}
             height={42} />
-        </Link>
+        
       </h1>
     </div>
   );
