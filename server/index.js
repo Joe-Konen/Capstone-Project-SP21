@@ -263,17 +263,21 @@ app.post("/employerRegister", (req, res) => {
         [empFName, empLName, empAddress, empEmail, empPassword, empUsername, latitude, longitude]
     ];
     
-    console.log(values[0]);
+    console.log("The result: ",values[0]);
     
     db.query(
         "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username, latitude, longitude) VALUES (?)",
         values,
-        function(err, rows, fields){
+        function(err, rows, result){
             if (err) throw err;
+            
         });
         
         res.send("registered")
 })
+
+
+
 
 app.post("/employerEdit", (req,res) => {
     const empUsername = req.body.username;
