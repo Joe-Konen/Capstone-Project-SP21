@@ -211,6 +211,28 @@ app.get("/JobBoard", (req, res) => {
     })
 })
 
+app.get("/employerJob", (req, res) => {
+
+    let userInfo = [];
+    db.query(
+        'SELECT * FROM Job', (err, result) => {
+            userInfo.push(result[0].jobID);
+            userInfo.push(result[0].jobName)
+            userInfo.push(result[0].jobCategory)
+            userInfo.push(result[0].wage);
+            userInfo.push(result[0].skillLevel);
+            userInfo.push(result[0].experienceRequired);
+            userInfo.push(result[0].datePosted);
+            userInfo.push(result[0].status);
+            userInfo.push(result[0].description);
+            userInfo.push(result[0].employerID);
+
+            console.log(userInfo)
+            res.send(userInfo)
+        }
+    )
+})
+
 app.post("/JobBoard", (req, res) => {
     db.query("INSERT INTO StudentToDoJobs", (err, result) => {
         console.log(result)
@@ -357,21 +379,5 @@ app.get('/employerID', (req, res) => {
     )
 })
 
-app.get('/myJobsPosted', (req, res) => {
-    let username = loggedInUser.user;
-    let password = loggedInUser.pass;
-    
-    db.query(
-        'SELECT employerID FROM Job WHERE emp_username = ? AND emp_password = ?',
-        [username, password],
-        (err, result) => {
-            if(err){
-                throw err;
-            }else{
-                console.log(result)
-                res.send(result)
-            }
-        }
-    )
-})
+
 app.listen(3001);

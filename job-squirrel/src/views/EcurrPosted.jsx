@@ -4,7 +4,15 @@ import Axios from 'axios';
 
 function EcurrPosted() {
   const [empID, setEmpID] = useState("")
-  const [job, setJob] = useState([])
+  const [jobID, setJobID] = useState("")
+  const [jobName, setJobName] = useState("")
+  const [jobCat, setJobCat] = useState("")
+  const [wage, setWage] = useState("")
+  const [skill, setSkill] = useState("")
+  const [exp, setExp] = useState("")
+  const [date, setDate] = useState("")
+  const [status, setStatus] = useState("")
+  const [desc, setDesc] = useState("")
 
   const getID = () => {
   
@@ -19,14 +27,18 @@ function EcurrPosted() {
   }
 
   const getTable = () => {
-    Axios.get('http://localhost:3001/myJobsPosted')
+    Axios.get('http://localhost:3001/employerJob')
     .then(function(response) {
+      const user = response.data;
+      setJobID(user[0])
+      console.log(user)
 
     })
   }
 
   useEffect(() => {
     getID();
+    getTable();
   }, [empID])
   
   return (
