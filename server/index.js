@@ -334,4 +334,44 @@ app.post('/jobPosting', (req, res) => {
             }
         });
 })
+
+app.get('/employerID', (req, res) => {
+    const empID = [];
+    let username = loggedInUser.user;
+    let password = loggedInUser.pass;
+     
+    db.query(
+        'SELECT employerID FROM Employer WHERE emp_username = ? AND emp_password = ?',
+        [username, password],
+        (err, result) => {
+            if(err){
+                throw err;
+            }else{
+                console.log("getting empID..")
+                console.log(result)
+                
+                empID.push(result[0].employerID)
+                res.send(empID)
+            }
+        }
+    )
+})
+
+app.get('/myJobsPosted', (req, res) => {
+    let username = loggedInUser.user;
+    let password = loggedInUser.pass;
+    
+    db.query(
+        'SELECT employerID FROM Job WHERE emp_username = ? AND emp_password = ?',
+        [username, password],
+        (err, result) => {
+            if(err){
+                throw err;
+            }else{
+                console.log(result)
+                res.send(result)
+            }
+        }
+    )
+})
 app.listen(3001);

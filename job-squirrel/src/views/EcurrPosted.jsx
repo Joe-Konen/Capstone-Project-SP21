@@ -1,28 +1,39 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import "./stylesheets/Style.css";
+import Axios from 'axios';
 
 function EcurrPosted() {
+  const [empID, setEmpID] = useState("")
+  const [job, setJob] = useState([])
+
+  const getID = () => {
+  
+    Axios.get('http://localhost:3001/employerID')
+    .then(function (response) {
+        const user = response.data
+        console.log(user[0])
+        
+        setEmpID(user[0]);
+        //console.log(user)
+    })
+  }
+
+  const getTable = () => {
+    Axios.get('http://localhost:3001/myJobsPosted')
+    .then(function(response) {
+
+    })
+  }
+
+  useEffect(() => {
+    getID();
+  }, [empID])
+  
   return (
-    <div className="about">
-      <div class="container">
-        <div class="row align-items-center my-5">
-          <div class="col-lg-7">
-            <img
-              class="img-fluid rounded mb-4 mb-lg-0"
-              src="http://placehold.it/900x400"
-              alt=""
-            />
-          </div>
-          <div class="col-lg-5">
-            <h1 class="font-weight-light">About</h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div>
+      
+      <h3 style={{textAlign: 'center', padding: '40px'}}>Currently Open Job Postings for Employee ID: {empID}</h3>
+      
     </div>
   );
 }
