@@ -39,7 +39,7 @@ function EcurrPosted() {
       <h3 style={{textAlign: 'center', padding: '40px'}}>Currently Open Job Postings for Employee ID: {empID}</h3>
 
       <div>
-      <table style={{width: '70%', margin: 'auto'}}>
+        {job ? <table style={{width: '70%', margin: 'auto'}}>
                 <thead style={{width: '70%'}}> 
                     <tr>
                     <th>Employer ID</th>
@@ -69,7 +69,8 @@ function EcurrPosted() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table> : <h3 style={{textAlign: 'center'}}> You have no jobs posted</h3>}
+      
       </div>
       
     </div>

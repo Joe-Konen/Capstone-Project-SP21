@@ -336,14 +336,13 @@ app.post('/jobPosting', (req, res) => {
 })
 
 app.get('/employerID', (req, res) => {
-    const empID = [];
+    global.empID = [];
     let username = loggedInUser.user;
     let password = loggedInUser.pass;
-     
+
     db.query(
         'SELECT employerID FROM Employer WHERE emp_username = ? AND emp_password = ? ',
-        [username, password, empID],
-        (err, result) => {
+        [username, password, empID], (err, result) => {
             if(err){
                 throw err;
             }else{
@@ -354,15 +353,15 @@ app.get('/employerID', (req, res) => {
                 res.send(empID);
             }
         }
-    )
-    
+    );
+
 })
 
 app.get("/employerJob", (req, res) => {
 
-    let empID = [];
     db.query(
-        'SELECT * FROM Job', (err, result) => {
+        'SELECT * FROM Job WHERE employerID = ?',
+        [empID], (err, result) => {
             console.log(result)
             res.send(result)
         }
