@@ -1,18 +1,11 @@
 import React, {useState, useEffect} from "react";
 import "./stylesheets/Style.css";
 import Axios from 'axios';
+import moment from 'moment';
 
 function EcurrPosted() {
   const [empID, setEmpID] = useState("")
-  const [jobID, setJobID] = useState("")
-  const [jobName, setJobName] = useState("")
-  const [jobCat, setJobCat] = useState("")
-  const [wage, setWage] = useState("")
-  const [skill, setSkill] = useState("")
-  const [exp, setExp] = useState("")
-  const [date, setDate] = useState("")
-  const [status, setStatus] = useState("")
-  const [desc, setDesc] = useState("")
+  const [job, setJob] = useState([]);
 
   const getID = () => {
   
@@ -29,9 +22,8 @@ function EcurrPosted() {
   const getTable = () => {
     Axios.get('http://localhost:3001/employerJob')
     .then(function(response) {
-      const user = response.data;
-      setJobID(user[0])
-      console.log(user)
+      setJob(response.data)
+      console.log(response.data)
 
     })
   }
@@ -45,6 +37,40 @@ function EcurrPosted() {
     <div>
       
       <h3 style={{textAlign: 'center', padding: '40px'}}>Currently Open Job Postings for Employee ID: {empID}</h3>
+
+      <div>
+      <table style={{width: '70%', margin: 'auto'}}>
+                <thead style={{width: '70%'}}> 
+                    <tr>
+                    <th>Employer ID</th>
+                    <th>Job ID</th>
+                    <th>Job Name</th>
+                    <th>Category</th>
+                    <th>Pay</th>
+                    <th>Skill Level</th>
+                    <th>Experience</th>
+                    <th>Date Posted</th>
+                    <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody style={{textAlign: 'left'}}>
+                
+                    {job.map((item) => (
+                        <tr key={item.jobID} >
+                            <td>{item.employerID}</td>
+                            <td>{item.jobID}</td>
+                            <td>{item.jobName}</td>
+                            <td>{item.jobCategory}</td>
+                            <td>${item.wage}</td>
+                            <td>{item.skillLevel}</td>
+                            <td>{item.experienceRequired}</td>
+                            <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
+                            <td>{item.description}</td>   
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+      </div>
       
     </div>
   );

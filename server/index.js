@@ -211,28 +211,6 @@ app.get("/JobBoard", (req, res) => {
     })
 })
 
-app.get("/employerJob", (req, res) => {
-
-    let userInfo = [];
-    db.query(
-        'SELECT * FROM Job', (err, result) => {
-            userInfo.push(result[0].jobID);
-            userInfo.push(result[0].jobName)
-            userInfo.push(result[0].jobCategory)
-            userInfo.push(result[0].wage);
-            userInfo.push(result[0].skillLevel);
-            userInfo.push(result[0].experienceRequired);
-            userInfo.push(result[0].datePosted);
-            userInfo.push(result[0].status);
-            userInfo.push(result[0].description);
-            userInfo.push(result[0].employerID);
-
-            console.log(userInfo)
-            res.send(userInfo)
-        }
-    )
-})
-
 app.post("/JobBoard", (req, res) => {
     db.query("INSERT INTO StudentToDoJobs", (err, result) => {
         console.log(result)
@@ -363,8 +341,8 @@ app.get('/employerID', (req, res) => {
     let password = loggedInUser.pass;
      
     db.query(
-        'SELECT employerID FROM Employer WHERE emp_username = ? AND emp_password = ?',
-        [username, password],
+        'SELECT employerID FROM Employer WHERE emp_username = ? AND emp_password = ? ',
+        [username, password, empID],
         (err, result) => {
             if(err){
                 throw err;
@@ -373,8 +351,20 @@ app.get('/employerID', (req, res) => {
                 console.log(result)
                 
                 empID.push(result[0].employerID)
-                res.send(empID)
+                res.send(empID);
             }
+        }
+    )
+    
+})
+
+app.get("/employerJob", (req, res) => {
+
+    let empID = [];
+    db.query(
+        'SELECT * FROM Job', (err, result) => {
+            console.log(result)
+            res.send(result)
         }
     )
 })
