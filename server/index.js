@@ -211,9 +211,35 @@ app.get("/JobBoard", (req, res) => {
     })
 })
 
-app.post("/JobBoard", (req, res) => {
-    db.query("INSERT INTO StudentToDoJobs", (err, result) => {
-        console.log(result)
+app.post("/insertJobs", (req, res) => {
+    console.log(req.body)
+    const jobID = req.body.jobID;
+    const jobName = req.body.jobName;
+    const jobCategory = req.body.category;
+    const wage = req.body.wage;
+    const skillLevel = req.body.jobSkill;
+    const expRequired = req.body.jobExp;
+    const datePosted = req.body.date;
+    const status = req.body.jobStatus;
+    const desc = req.body.description;
+    const stuID = req.body.stuID;
+
+    db.query("INSERT INTO StudentToDoJobs (jobID, jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description) \
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [jobID, jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc], 
+    function(err, result){
+        console.log("Server:",result)
+        //if(err) throw err;
+        // const str = JSON.stringify({
+        //     jobID,
+        //     jobName,
+        //     jobCategory,
+        //     wage,
+        //     skillLevel,
+        //     expRequired,
+        //     datePosted,
+        //     status,
+        //     desc
+        // })
         res.send(result);
     })
 })
@@ -335,6 +361,27 @@ app.post('/jobPosting', (req, res) => {
         });
 })
 
+app.get('/studentID', (req, res) => {
+    global.stuID = [];
+    let username = loggedInUser.user;
+    let password = loggedInUser.pass;
+
+    db.query(
+        'SELECT studentID FROM Student WHERE stu_username = ? AND stu_password = ?',
+        [username, password, stuID], (err, result) => {
+            if(err){
+                throw err;
+            }else{
+                console.log("getting student..")
+                console.log(result)
+                
+                stuID.push(result[0].studentID)
+                res.send(stuID);
+            }
+        }
+    )
+})
+
 app.get('/employerID', (req, res) => {
     global.empID = [];
     let username = loggedInUser.user;
@@ -366,7 +413,8 @@ app.get("/employerJob", (req, res) => {
             res.send(result)
         }
     )
-})
+});
+
 
 
 app.listen(3001);

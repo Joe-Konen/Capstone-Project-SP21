@@ -15,7 +15,6 @@ function EcurrPosted() {
         console.log(user[0])
         
         setEmpID(user[0]);
-        //console.log(user)
     })
   }
 

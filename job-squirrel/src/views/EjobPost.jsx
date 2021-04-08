@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 import "./stylesheets/Style.css";
 import Axios from 'axios';
@@ -33,6 +33,21 @@ function EjobPost() {
 
     }
 
+    useEffect(() => {
+        getID();
+    }, [empID])
+
+    const getID = () => {
+  
+        Axios.get('http://localhost:3001/employerID')
+        .then(function (response) {
+            const user = response.data
+            console.log(user[0])
+            
+            setEmpID(user[0]);
+        })
+      }
+
     const routeChange = () => {
         let path = 'HomeEmployer';
         history.push(path);
@@ -49,12 +64,9 @@ function EjobPost() {
                 </div>
             <div class="Register">
                 <label for ="empID">Your employee ID: </label>
-                    <input type="text"
-                    id="empID"
-                    onChange={(e) => {
-                        setEmpID(e.target.value);
-                    }}
-                    />
+                    <div>
+                        {empID}
+                    </div>
 
                 <label for ="jobName">What's the name of the job? </label>
                     <input type="text"
