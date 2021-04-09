@@ -18,6 +18,7 @@ function Map(){
         Axios.get("http://localhost:3001/SjobBoard").then((response)=>{
             setAddress(response.data)
             setEmployerID(response.data.employerID)
+
         })
     }
 
@@ -49,14 +50,16 @@ function Map(){
                 <InfoWindow
                     position={{lat: parseFloat(selectedAdd.latitude), lng: parseFloat(selectedAdd.longitude)}}
                     onCloseClick={()=>{setSelectedAdd(null)}}>
-                <div>
-                    <p>Job Information:</p>
-                    <p>{selectedAdd.address}</p>
-
-                </div>
+                <div>This is where Job info will be</div>
             </InfoWindow>
             ))
         )}
+        {/* <div>
+        {address.map((a) => (
+            <p>{lat},{lng}</p>
+           
+        ))}
+        </div> */}
         
         </GoogleMap>
 

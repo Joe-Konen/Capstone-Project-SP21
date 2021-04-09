@@ -50,9 +50,8 @@ function Map(){
                     position={{lat: parseFloat(selectedAdd.latitude), lng: parseFloat(selectedAdd.longitude)}}
                     onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>
-                    <p>Job Information:</p>
-                    <p>{selectedAdd.address}</p>
-
+                    <p>Information:</p>
+                    <p{a.address}
                 </div>
             </InfoWindow>
             ))

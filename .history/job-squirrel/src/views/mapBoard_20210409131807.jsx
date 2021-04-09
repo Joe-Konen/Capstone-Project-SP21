@@ -51,7 +51,7 @@ function Map(){
                     onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>
                     <p>Job Information:</p>
-                    <p>{selectedAdd.address}</p>
+                    <p>{a.address}</p>
 
                 </div>
             </InfoWindow>
