@@ -71,7 +71,6 @@ function Table({ job }) {
     const studentToDo = () => {
         
         Axios.post("http://localhost:3001/insertJobs", chooseJob, {
-            
         })
         .then((response) => {
             console.log("ResPONSE: ",response.data);
@@ -113,8 +112,8 @@ function Table({ job }) {
                 </tbody>
             </table>
             
-            <div style={{paddingLeft: '15%', paddingBottom: '20px'}}> 
-            <h2>Checked: {isChecked ? "true" : "false"}</h2>
+            <div style={{paddingLeft: '15%', paddingBottom: '20px'}}>
+                <h3>Your student id: {stuID}</h3>
                 <h4>Chosen jobs:</h4>
                     {chooseJob.map((item) => (
                             <p>{item.jobName}, with a wage of ${item.wage}</p>

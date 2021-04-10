@@ -212,34 +212,35 @@ app.get("/JobBoard", (req, res) => {
 })
 
 app.post("/insertJobs", (req, res) => {
-    console.log(req.body)
-    const jobID = req.body.jobID;
-    const jobName = req.body.jobName;
-    const jobCategory = req.body.category;
-    const wage = req.body.wage;
-    const skillLevel = req.body.jobSkill;
-    const expRequired = req.body.jobExp;
-    const datePosted = req.body.date;
-    const status = req.body.jobStatus;
-    const desc = req.body.description;
-    const stuID = req.body.stuID;
+    console.log("Chosen jobs:", req.body)
 
-    db.query("INSERT INTO StudentToDoJobs (jobID, jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description) \
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [jobID, jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc], 
+    let values = req.body;
+    let stuID = req.body.stuID;
+    let arr = values.reduce((o, a) => {
+        let newArr = [];
+        newArr.push(a.jobID)
+        newArr.push(a.jobName)
+        newArr.push(a.jobCategory)
+        newArr.push(a.wage)
+        newArr.push(a.skillLevel)
+        newArr.push(a.experienceRequired)
+        newArr.push(a.datePosted)
+        newArr.push(a.status)
+        newArr.push(a.description)
+        o.push(newArr)
+        return o;
+    }, [])
+    
+    console.log(stuID)
+    console.log(`UHHH: ${arr}`)
+
+    db.query("INSERT INTO StudentToDoJobs (jobID, jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description, stuID) \
+    VALUES ? ", [arr], 
     function(err, result){
+        if(err) throw err;
         console.log("Server:",result)
-        //if(err) throw err;
-        // const str = JSON.stringify({
-        //     jobID,
-        //     jobName,
-        //     jobCategory,
-        //     wage,
-        //     skillLevel,
-        //     expRequired,
-        //     datePosted,
-        //     status,
-        //     desc
-        // })
+        //console.log("Records inserted: ", result.affectedRows)
+
         res.send(result);
     })
 })
@@ -341,12 +342,6 @@ app.post('/jobPosting', (req, res) => {
     const status = req.body.jobStatus;
     const desc = req.body.description;
     const empID = req.body.empID;
-
-    var values = [
-        [jobName, jobCategory, wage, skillLevel, expRequired, datePosted, status, desc, empID]
-    ];
-
-    //console.log(values[0])
 
     db.query(
         "INSERT INTO Job (jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description, employerID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
