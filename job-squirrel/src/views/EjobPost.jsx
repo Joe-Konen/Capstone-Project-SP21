@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-// import { useHistory } from "react-router-dom";
+import React, {useState, useEffect} from 'react'
+import { useHistory } from "react-router-dom";
 import "./stylesheets/Style.css";
 import Axios from 'axios';
 
@@ -13,6 +13,7 @@ function EjobPost() {
     const [status, setStatus] = useState(0)
     const [desc, setDesc] = useState("")
     const [empID, setEmpID] = useState("")
+    const history = useHistory();
 
     const postJob = () => {
         console.log(jCat)
@@ -32,10 +33,25 @@ function EjobPost() {
 
     }
 
-    // const routeChange = () => {
-    //     let path = 'HomeEmployer';
-    //     history.push(path);
-    // }
+    useEffect(() => {
+        getID();
+    }, [empID])
+
+    const getID = () => {
+  
+        Axios.get('http://localhost:3001/employerID')
+        .then(function (response) {
+            const user = response.data
+            console.log(user[0])
+            
+            setEmpID(user[0]);
+        })
+      }
+
+    const routeChange = () => {
+        let path = 'HomeEmployer';
+        history.push(path);
+    }
     return (
         <div>  
             <h1 style={{textAlign: 'center', padding: '30px'}}>Post a new job here</h1>
@@ -48,12 +64,9 @@ function EjobPost() {
                 </div>
             <div class="Register">
                 <label for ="empID">Your employee ID: </label>
-                    <input type="text"
-                    id="empID"
-                    onChange={(e) => {
-                        setEmpID(e.target.value);
-                    }}
-                    />
+                    <div>
+                        {empID}
+                    </div>
 
                 <label for ="jobName">What's the name of the job? </label>
                     <input type="text"
@@ -120,7 +133,7 @@ function EjobPost() {
                         setDesc(e.target.value);
                     }}/>
 
-                {/* <button className="backButton" onClick={routeChange}>Cancel</button> */}
+                <button className="backButton" onClick={routeChange}>Cancel</button>
                 <button onClick={postJob}> Post</button>
             </div>   
         </div>

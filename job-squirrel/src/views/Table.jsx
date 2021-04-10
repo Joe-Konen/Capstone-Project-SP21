@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import moment from 'moment'
+import ButtonGroup from '../components/elements/ButtonGroup';
+import Button from '../components/elements/Button';
+import Axios from 'axios';
 
 function Table({ job }) {
     const [chooseJob, setChooseJob] = useState([]);
     const [isChecked, setCheckbox] = useState(false);
     const [checkedJobs, setCheckedJobs] = useState([])
-
+    const [stuID, setStuID] = useState("");
 
     useEffect(() => {
         checkedJobs.map((check) => {
@@ -13,10 +16,10 @@ function Table({ job }) {
             for(var i=0; i<job.length; i++){
 
                 if(job[i].jobID == check){
-                    console.log(job[i])
+                    //console.log(job[i])
                     chooseJob.push(job[i])
                     setChooseJob(arr => [...arr])
-                    console.log(chooseJob)
+                    console.log("Chosen jobs:", chooseJob)
                     
                 }
             }
@@ -24,28 +27,56 @@ function Table({ job }) {
     
     }, [isChecked])
 
+    useEffect(() => {
+        getID();
+    }, [stuID])
+
     
     const handleChange = (e, job) => {
         setCheckbox({
           ...isChecked,
           [job]: e.target.isChecked,
         })
-
-        let index
+        
 
         if(e.target.checked){
             var checkedJobs = e.target.value
             setCheckedJobs(setCheckedJobs => [setCheckedJobs, checkedJobs])
-
-        }else{
-            index = checkedJobs.indexOf(e.target.value)
-            if(index !== -1){
-                checkedJobs.splice(index, 1)
-                setCheckedJobs(checkedJobs)
-
-            } 
+            console.log(e.target.checked)
+            
+         }else{
+            setCheckbox(false);
+            console.log(e.target.checked)
+            console.log("Popped!", chooseJob.pop())
+            
+            //console.log("Popped again",chooseJob.pop())
+            console.log("New job list", chooseJob)
+            chooseJob.pop();
+            console.log("Modified job list: ", chooseJob)
+            
+            
         }
-      };
+    };
+
+    const getID = () => {
+        Axios.get("http://localhost:3001/studentID")
+        .then(function(response){
+            const user = response.data
+            console.log(user[0])
+        
+            setStuID(user[0]);
+        })
+    }
+
+    const studentToDo = () => {
+        
+        Axios.post("http://localhost:3001/insertJobs", chooseJob, {
+        })
+        .then((response) => {
+            console.log("ResPONSE: ",response.data);
+          });
+        
+    };
 
     
     return (
@@ -67,7 +98,7 @@ function Table({ job }) {
                 <tbody style={{textAlign: 'left'}}>
                     {job.map((item) => (
                         <tr key={item.jobID} >
-                            <td> <input type="checkbox" value={item.jobID} checked={isChecked[item.jobID]} onChange={(e)=>{handleChange(e, item.jobID)}}/></td>
+                            <td> <input type="checkbox" value={item.jobID} checked={isChecked[item.jobID]} onClick={(e)=>{handleChange(e, item.jobID)}}/></td>
                             <td>{item.jobID}</td>
                             <td>{item.jobName}</td>
                             <td>{item.jobCategory}</td>
@@ -81,12 +112,19 @@ function Table({ job }) {
                 </tbody>
             </table>
             
-            <div style={{paddingLeft: '15%', paddingBottom: '20px'}}> 
+            <div style={{paddingLeft: '15%', paddingBottom: '20px'}}>
+                <h3>Your student id: {stuID}</h3>
                 <h4>Chosen jobs:</h4>
                     {chooseJob.map((item) => (
                             <p>{item.jobName}, with a wage of ${item.wage}</p>
                         ))}
             </div>
+            <div style={{paddingLeft: '15%'}}>
+                <ButtonGroup>
+                <Button onClick={studentToDo} tag="a" color="primary">Submit Job</Button>
+                </ButtonGroup>
+            </div>
+            
         </div>
     )
     

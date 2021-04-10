@@ -1,28 +1,77 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import "./stylesheets/Style.css";
+import Axios from 'axios';
+import moment from 'moment';
 
 function EcurrPosted() {
+  const [empID, setEmpID] = useState("")
+  const [job, setJob] = useState([]);
+
+  const getID = () => {
+  
+    Axios.get('http://localhost:3001/employerID')
+    .then(function (response) {
+        const user = response.data
+        console.log(user[0])
+        
+        setEmpID(user[0]);
+    })
+  }
+
+  const getTable = () => {
+    Axios.get('http://localhost:3001/employerJob')
+    .then(function(response) {
+      setJob(response.data)
+      console.log(response.data)
+
+    })
+  }
+
+  useEffect(() => {
+    getID();
+    getTable();
+  }, [empID])
+  
   return (
-    <div className="about">
-      <div class="container">
-        <div class="row align-items-center my-5">
-          <div class="col-lg-7">
-            <img
-              class="img-fluid rounded mb-4 mb-lg-0"
-              src="http://placehold.it/900x400"
-              alt=""
-            />
-          </div>
-          <div class="col-lg-5">
-            <h1 class="font-weight-light">About</h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
-          </div>
-        </div>
+    <div>
+      
+      <h3 style={{textAlign: 'center', padding: '40px'}}>Currently Open Job Postings for Employee ID: {empID}</h3>
+
+      <div>
+        {job ? <table style={{width: '70%', margin: 'auto'}}>
+                <thead style={{width: '70%'}}> 
+                    <tr>
+                    <th>Employer ID</th>
+                    <th>Job ID</th>
+                    <th>Job Name</th>
+                    <th>Category</th>
+                    <th>Pay</th>
+                    <th>Skill Level</th>
+                    <th>Experience</th>
+                    <th>Date Posted</th>
+                    <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody style={{textAlign: 'left'}}>
+                
+                    {job.map((item) => (
+                        <tr key={item.jobID} >
+                            <td>{item.employerID}</td>
+                            <td>{item.jobID}</td>
+                            <td>{item.jobName}</td>
+                            <td>{item.jobCategory}</td>
+                            <td>${item.wage}</td>
+                            <td>{item.skillLevel}</td>
+                            <td>{item.experienceRequired}</td>
+                            <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
+                            <td>{item.description}</td>   
+                        </tr>
+                    ))}
+                </tbody>
+            </table> : <h3 style={{textAlign: 'center'}}> You have no jobs posted</h3>}
+      
       </div>
+      
     </div>
   );
 }

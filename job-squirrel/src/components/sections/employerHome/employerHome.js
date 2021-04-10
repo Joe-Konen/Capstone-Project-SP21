@@ -69,7 +69,7 @@ const FeaturesSplit = ({
                     <Button tag="a" color="primary" wideMobile href="employerProfile">
                     My Profile
                     </Button>
-                    <Button tag="a" color="primary" wideMobile href="EcurrPosted">
+                    <Button tag="a" color="primary" wideMobile href="myJobsPosted">
                     My Posted Jobs
                     </Button>
                     <Button tag="a" color="primary" wideMobile href="FAQ">
