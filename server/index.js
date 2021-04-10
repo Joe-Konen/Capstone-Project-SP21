@@ -215,7 +215,6 @@ app.post("/insertJobs", (req, res) => {
     console.log("Chosen jobs:", req.body)
 
     let values = req.body;
-    let stuID = req.body.stuID;
     let arr = values.reduce((o, a) => {
         let newArr = [];
         newArr.push(a.jobID)
@@ -227,19 +226,19 @@ app.post("/insertJobs", (req, res) => {
         newArr.push(a.datePosted)
         newArr.push(a.status)
         newArr.push(a.description)
+        newArr.push(stuID)
+        
         o.push(newArr)
         return o;
     }, [])
-    
-    console.log(stuID)
-    console.log(`UHHH: ${arr}`)
 
-    db.query("INSERT INTO StudentToDoJobs (jobID, jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description, stuID) \
-    VALUES ? ", [arr], 
+    console.log(`Arr contents: ${arr}`)
+
+    db.query("INSERT INTO StudentToDoJobs (jobID, jobName, jobCategory, wage, skillLevel, experienceRequired, datePosted, status, description, studentID) \
+    VALUES ?", [arr, stuID], 
     function(err, result){
         if(err) throw err;
         console.log("Server:",result)
-        //console.log("Records inserted: ", result.affectedRows)
 
         res.send(result);
     })
