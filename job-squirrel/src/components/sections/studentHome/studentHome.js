@@ -137,7 +137,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('../../../assets/images/features-split-image-02.png')}
+                  src={require('../../../assets/images/sql.jpg')}
                   alt="Features split 02"
                   width={528}
                   height={396} />
@@ -153,9 +153,15 @@ const FeaturesSplit = ({
                   Your Reviews Are Important!
                   </h3>
                 <p className="m-0">
-                  After completing a job, make sure to leave a review for your employer based on your experience working with them. Be sure to be respectful and accurate as they can review you also. Feedback is important to providing the best possible experience here on JobSquirrel!
+                  Please take a minute to complete the JobSquirrel survey and let us know what you think about our service! Thank You!
                   </p>
+                  <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="https://dh3kcwujsy3.typeform.com/to/Vev44fmU">
+                    Take Survey
+                    </Button>
+                  </ButtonGroup>
               </div>
+              
               <div className={
                 classNames(
                   'split-item-image center-content-mobile reveal-from-bottom',
@@ -163,7 +169,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('../../../assets/images/features-split-image-03.png')}
+                  src={require('../../../assets/images/survey.png')}
                   alt="Features split 03"
                   width={528}
                   height={396} />

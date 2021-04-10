@@ -54,7 +54,7 @@ function EjobPost() {
     }
     return (
         <div>  
-            <h1 style={{textAlign: 'center', padding: '30px'}}>Post a new job here</h1>
+            <h1 style={{textAlign: 'center', padding: '30px'}}>Post a New Job</h1>
                 <div class="Instructions">
                     <p>Instructions:</p>
                         <p>The job's skill level is on a scale of 1-5, with 5 being the highest level</p>
@@ -133,8 +133,8 @@ function EjobPost() {
                         setDesc(e.target.value);
                     }}/>
 
-                <button className="backButton" onClick={routeChange}>Cancel</button>
-                <button onClick={postJob}> Post</button>
+                <button className="button button-primary button-wide-mobile button-sm" onClick={routeChange}>Cancel</button>
+                <button className="button button-primary button-wide-mobile button-sm" onClick={postJob}> Post</button>
             </div>   
         </div>
     )
