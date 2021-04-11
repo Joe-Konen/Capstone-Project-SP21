@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import "./stylesheets/Style.css";
 import Axios from 'axios';
 import moment from 'moment';
+import ButtonGroup from "../components/elements/ButtonGroup";
+import Button from '../components/elements/Button';
 
 function EcurrPosted() {
   const [empID, setEmpID] = useState("")
@@ -16,6 +18,17 @@ function EcurrPosted() {
         
         setEmpID(user[0]);
     })
+  }
+
+  const deleteJob = (jobID) => {
+    Axios.delete(`http://localhost:3001/delete/${jobID}`)
+    .then(function(response) {
+        console.log("Deleted")
+        setJob(job.filter((val) => {
+          return val.jobID != jobID
+        }))
+    })
+
   }
 
   const getTable = () => {
@@ -64,7 +77,14 @@ function EcurrPosted() {
                             <td>{item.skillLevel}</td>
                             <td>{item.experienceRequired}</td>
                             <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
-                            <td>{item.description}</td>   
+                            <td>{item.description}</td> 
+                            <td>
+                              <ButtonGroup>
+                              <Button tag="a" color="primary" wideMobile onClick={() => {deleteJob(item.jobID)}}>
+                                Delete
+                                </Button>
+                              </ButtonGroup>
+                              </td> 
                         </tr>
                     ))}
                 </tbody>
