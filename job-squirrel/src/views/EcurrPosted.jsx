@@ -20,6 +20,15 @@ function EcurrPosted() {
     })
   }
 
+  const getTable = () => {
+    Axios.get('http://localhost:3001/employerJob')
+    .then(function(response) {
+      setJob(response.data)
+      console.log(response.data)
+
+    })
+  }
+
   const deleteJob = (jobID) => {
     Axios.delete(`http://localhost:3001/delete/${jobID}`)
     .then(function(response) {
@@ -29,15 +38,6 @@ function EcurrPosted() {
         }))
     })
 
-  }
-
-  const getTable = () => {
-    Axios.get('http://localhost:3001/employerJob')
-    .then(function(response) {
-      setJob(response.data)
-      console.log(response.data)
-
-    })
   }
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function EcurrPosted() {
       <h3 style={{textAlign: 'center', padding: '40px'}}>Currently Open Job Postings for Employee ID: {empID}</h3>
 
       <div>
-        {job ? <table style={{width: '70%', margin: 'auto'}}>
+        <table style={{width: '70%', margin: 'auto'}}>
                 <thead style={{width: '70%'}}> 
                     <tr>
                     <th>Employer ID</th>
@@ -63,6 +63,7 @@ function EcurrPosted() {
                     <th>Experience</th>
                     <th>Date Posted</th>
                     <th>Description</th>
+                    <th>Delete job?</th>
                     </tr>
                 </thead>
                 <tbody style={{textAlign: 'left'}}>
@@ -88,8 +89,16 @@ function EcurrPosted() {
                         </tr>
                     ))}
                 </tbody>
-            </table> : <h3 style={{textAlign: 'center'}}> You have no jobs posted</h3>}
+            </table>
       
+      </div>
+
+      <div style={{paddingLeft: '15%', paddingBottom: '20px', paddingTop: '20px'}}className="reveal-from-bottom" data-reveal-delay="600">
+        <ButtonGroup>
+            <Button tag="a" color="primary" wideMobile href="/HomeEmployer">
+            Go Back
+            </Button>
+        </ButtonGroup>
       </div>
       
     </div>

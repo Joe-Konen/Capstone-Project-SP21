@@ -399,10 +399,22 @@ app.get('/employerID', (req, res) => {
 })
 
 app.get("/employerJob", (req, res) => {
-
     db.query(
         'SELECT * FROM Job WHERE employerID = ?',
         [empID], (err, result) => {
+            if(err) throw err;
+            console.log(result)
+            res.send(result)
+        }
+    )
+});
+
+app.get("/chosenJobs/:studentID", (req, res) => {
+    const stuID = req.params.studentID;
+    db.query(
+        'SELECT * FROM StudentToDoJobs WHERE studentID = ?', 
+        stuID, (err, result) => {
+            if(err) throw err;
             console.log(result)
             res.send(result)
         }
