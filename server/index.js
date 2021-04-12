@@ -3,16 +3,11 @@ const mysql = require("mysql");
 const cors = require("cors");
 const app = express();
 
-//const bcrypt = require('bcrypt');
-//const saltRounds = 10;
-
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 app.use(express.json());
-
-//app.use(cors());
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}))

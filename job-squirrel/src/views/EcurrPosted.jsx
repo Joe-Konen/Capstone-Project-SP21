@@ -52,45 +52,43 @@ function EcurrPosted() {
 
       <div>
         <table style={{width: '70%', margin: 'auto'}}>
-                <thead style={{width: '70%'}}> 
-                    <tr>
-                    <th>Employer ID</th>
-                    <th>Job ID</th>
-                    <th>Job Name</th>
-                    <th>Category</th>
-                    <th>Pay</th>
-                    <th>Skill Level</th>
-                    <th>Experience</th>
-                    <th>Date Posted</th>
-                    <th>Description</th>
-                    <th>Delete job?</th>
-                    </tr>
-                </thead>
-                <tbody style={{textAlign: 'left'}}>
-                
-                    {job.map((item) => (
-                        <tr key={item.jobID} >
-                            <td>{item.employerID}</td>
-                            <td>{item.jobID}</td>
-                            <td>{item.jobName}</td>
-                            <td>{item.jobCategory}</td>
-                            <td>${item.wage}</td>
-                            <td>{item.skillLevel}</td>
-                            <td>{item.experienceRequired}</td>
-                            <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
-                            <td>{item.description}</td> 
-                            <td>
-                              <ButtonGroup>
-                              <Button tag="a" color="primary" wideMobile onClick={() => {deleteJob(item.jobID)}}>
-                                Delete
-                                </Button>
-                              </ButtonGroup>
-                              </td> 
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-      
+          <thead style={{width: '70%'}}> 
+            <tr>
+            <th>Employer ID</th>
+            <th>Job ID</th>
+            <th>Job Name</th>
+            <th>Category</th>
+            <th>Pay</th>
+            <th>Skill Level</th>
+            <th>Experience</th>
+            <th>Date Posted</th>
+            <th>Description</th>
+            <th>Delete job?</th>
+            </tr>
+          </thead>
+            <tbody style={{textAlign: 'left'}}>
+              {job.map((item) => (
+                <tr key={item.jobID} >
+                  <td>{item.employerID}</td>
+                  <td>{item.jobID}</td>
+                  <td>{item.jobName}</td>
+                  <td>{item.jobCategory}</td>
+                  <td>${item.wage}</td>
+                  <td>{item.skillLevel}</td>
+                  <td>{item.experienceRequired}</td>
+                  <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
+                  <td>{item.description}</td> 
+                  <td>
+                    <ButtonGroup>
+                      <Button tag="a" color="primary" wideMobile onClick={() => {deleteJob(item.jobID)}}>
+                        Delete
+                      </Button>
+                    </ButtonGroup>
+                  </td> 
+                </tr>
+              ))}
+            </tbody>
+        </table>
       </div>
 
       <div style={{paddingLeft: '15%', paddingBottom: '20px', paddingTop: '20px'}}className="reveal-from-bottom" data-reveal-delay="600">
