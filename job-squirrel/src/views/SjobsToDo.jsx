@@ -30,6 +30,17 @@ function SjobsToDo() {
     })
   }
 
+  const finishJob = (jobID) => {
+    Axios.put(`http://localhost:3001/updateJob/${jobID}`)
+    .then((response) => {
+      alert('updated job status')
+      setJob(job.filter((val) => {
+        return val.jobID != jobID
+      }))
+    })
+  }
+
+
 //   const deleteJob = (jobID) => {
 //     Axios.delete(`http://localhost:3001/delete/${jobID}`)
 //     .then(function(response) {
@@ -40,6 +51,7 @@ function SjobsToDo() {
 //     })
 
 //   }
+
 
   useEffect(() => {
       getID();
@@ -64,7 +76,7 @@ function SjobsToDo() {
                 <th>Experience</th>
                 <th>Date Posted</th>
                 <th>Description</th>
-                <th>Delete job?</th>
+                <th>Finished job?</th>
                 </tr>
             </thead>
             <tbody style={{textAlign: 'left'}}>
@@ -79,7 +91,14 @@ function SjobsToDo() {
                         <td>{item.skillLevel}</td>
                         <td>{item.experienceRequired}</td>
                         <td>{moment(item.datePosted).format('MM/DD/YYYY')}</td>
-                        <td>{item.description}</td> 
+                        <td>{item.description}</td>
+                        <td>
+                              <ButtonGroup>
+                              <Button tag="a" color="primary" wideMobile onClick={() => {finishJob(item.jobID)}}>
+                                Finish
+                                </Button>
+                              </ButtonGroup>
+                              </td> 
                     </tr>
                 ))}
             </tbody>

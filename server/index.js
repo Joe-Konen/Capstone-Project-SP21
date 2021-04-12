@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
 
@@ -398,7 +398,8 @@ app.get('/employerID', (req, res) => {
 
 })
 
-app.get("/employerJob", (req, res) => {
+app.get("/employerJob/:employerID", (req, res) => {
+    const empID = req.params.employerID;
     db.query(
         'SELECT * FROM Job WHERE employerID = ?',
         [empID], (err, result) => {
@@ -430,6 +431,18 @@ app.delete("/delete/:jobID", (req, res) => {
             if(err) throw err;
             res.send(result)
         })
+})
+
+app.put("/updateJob/:jobID", (req, res) => {
+    const jobID = req.params.jobID;
+    console.log(jobID)
+    db.query(
+        'UPDATE Job SET status = 1 WHERE jobID = ?',
+        jobID, (err, result) => {
+            if(err) throw err;
+            res.send(result)
+        }
+    ) 
 })
 
 app.listen(3001);

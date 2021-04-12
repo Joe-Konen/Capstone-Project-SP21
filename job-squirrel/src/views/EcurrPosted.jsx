@@ -20,8 +20,8 @@ function EcurrPosted() {
     })
   }
 
-  const getTable = () => {
-    Axios.get('http://localhost:3001/employerJob')
+  const getTable = (empID) => {
+    Axios.get(`http://localhost:3001/employerJob/${empID}`)
     .then(function(response) {
       setJob(response.data)
       console.log(response.data)
@@ -42,7 +42,7 @@ function EcurrPosted() {
 
   useEffect(() => {
     getID();
-    getTable();
+    getTable(empID);
   }, [empID])
   
   return (
