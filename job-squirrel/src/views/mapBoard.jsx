@@ -2,9 +2,11 @@ import React, {useState, useEffect} from "react";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from "react-google-maps";
 import Geocode from "react-geocode";
 import Axios from "axios";
+import {useHistory} from "react-router-dom";
 
 Geocode.setApiKey("AIzaSyAD9W_BKtjjIUFDJKJ3dRGf14iLJKfuG7U");
 
+var loggedIn = false;
 
 function Map(){
 
@@ -16,6 +18,24 @@ function Map(){
     const [locateLat, setLocateLat] = useState([]);
     const [locateLng, setLocateLng] = useState([]);
 
+    const history = useHistory();
+
+    const userCheck = () => {
+        if(!loggedIn){
+            console.log("authenticating")
+            Axios.get('http://localhost:3001/checkAccess')
+            .then(function (res) {
+                if(res.data == "not logged in"){
+                    history.push("/");
+                }
+                if(res.data == "logged in"){
+                    loggedIn = true;
+                }
+            })
+          }
+      }
+    
+      userCheck();
     
     const getAddress = () => {
         Axios.get("http://localhost:3001/SjobBoard").then((response)=>{

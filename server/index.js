@@ -105,6 +105,15 @@ app.get("/getEmployer", (req, res) => {
     )
 })
 
+app.get("/checkAccess", (req, res) => {
+    if(loggedInUser.user === ""){
+        res.send("not logged in");
+    }
+    else {
+        res.send("logged in");
+    }
+})
+
 app.post("/editStudent", (req,res) => {
     const stuUsername = req.body.username;
     const stuPassword = req.body.password;
