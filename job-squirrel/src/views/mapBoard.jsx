@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from "react-google-maps";
+import ButtonGroup from '../components/elements/ButtonGroup';
+import Button from '../components/elements/Button';
 import Geocode from "react-geocode";
 import Axios from "axios";
 
@@ -61,8 +63,8 @@ function Map(){
                     onCloseClick={()=>{setSelectedAdd(null)}}>
                 <div>
                     <p>Job Information:</p>
-                    <p>{selectedAdd.address}</p>
-                    <p>{description}</p>
+                    <p>Address: {selectedAdd.address}</p>
+                    <p>Employer ID: {selectedAdd.employerID}</p>
                     
                 </div>
             </InfoWindow>
@@ -85,6 +87,12 @@ export default function mapBoard(){
         containerElement={<div style={{height:"100%"}}/>}
         mapElement={<div style={{height:"100%"}}/>}
         />
+        <br></br>
+        <ButtonGroup>
+            <Button tag="a" color="primary" wideMobile href="/sJobBoard">
+            Go Back
+            </Button>
+        </ButtonGroup>
 
     </div>;
 }
