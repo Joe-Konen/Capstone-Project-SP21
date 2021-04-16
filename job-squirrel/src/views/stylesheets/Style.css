@@ -31,3 +31,16 @@ div.Register {
     width: 500px !important;
   }
 /*End of Registration Pages*/
+
+
+/*Review pages*/
+.flex{
+  display: flex;
+}
+
+.box{
+  width: 300px;
+  margin-left: 43%;
+}
+
+/*End of Review pages*/
