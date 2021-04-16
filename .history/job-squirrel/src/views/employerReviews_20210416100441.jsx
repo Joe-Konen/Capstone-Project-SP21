@@ -27,7 +27,7 @@ function StarIcon(props) {
     }, [rating, hoverRating, index]);
     return (
         <div
-          style={{width:'50px'}}
+          style={{background:'red', justiftyContent:"center", alignItems:"center"}}
           className ="cursor-pointer"
           onMouseEnter={() => onMouseEnter(index)} 
           onMouseLeave={() => onMouseLeave()} 
@@ -55,6 +55,8 @@ const EmployerReview = () => {
         color: "#4a54f1",
         textAlign: "center",
         paddingTop: "100px",
+        display:'grid',
+        item
     }
     return(
         <div className="employerStar" style={styleObj}>
@@ -62,8 +64,7 @@ const EmployerReview = () => {
 
         <div>
             <h3>How was the work they completed?</h3>
-            <div className="box" style={{height:'300px', width:'400px', background:'blue'}}>
-            <div style={{height:'1.5m', width:'1.5em', background:'red', gridColumnStart:'2'}}>
+            <div style={{height:'1.5m', width:'1.5em'}}>
             {[1, 2, 3, 4, 5].map((index) => {
           return (
             <RatingIcon 
@@ -76,8 +77,7 @@ const EmployerReview = () => {
             />
           )
             })}
-        </div>
-            </div> 
+        </div> 
         </div >
            
         </div>

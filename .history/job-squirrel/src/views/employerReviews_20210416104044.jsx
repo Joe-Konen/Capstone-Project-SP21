@@ -27,7 +27,7 @@ function StarIcon(props) {
     }, [rating, hoverRating, index]);
     return (
         <div
-          style={{width:'50px'}}
+          style={{width:'50px', display:'grid', gridAutoColumns:'auto auto auto auto auto'}}
           className ="cursor-pointer"
           onMouseEnter={() => onMouseEnter(index)} 
           onMouseLeave={() => onMouseLeave()} 
