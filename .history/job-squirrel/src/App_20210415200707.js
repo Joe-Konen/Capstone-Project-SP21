@@ -26,7 +26,7 @@ import EjobPost from './views/EjobPost';
 import EcurrPosted from './views/EcurrPosted';
 import LoginBypass from './views/LoginBypass';
 import mapBoard from './views/mapBoard';
-import EmployerReviews from './views/EmployerReviews';
+import emplo
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -75,7 +75,7 @@ const App = () => {
           <AppRoute exact path="/newJobPosting" component={EjobPost} layout={LayoutDefault} />
           <AppRoute exact path="/Login/Bypass" component={LoginBypass} layout={LayoutDefault} />
           <AppRoute exact path="/mapBoard" component={mapBoard} layout={LayoutDefault} />
-          <AppRoute exact path="/EmployerReviews" component={EmployerReviews} layout={LayoutDefault} />
+
         </Switch>
       )} />
   );

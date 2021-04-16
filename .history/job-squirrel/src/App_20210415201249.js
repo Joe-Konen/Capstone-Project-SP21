@@ -75,7 +75,7 @@ const App = () => {
           <AppRoute exact path="/newJobPosting" component={EjobPost} layout={LayoutDefault} />
           <AppRoute exact path="/Login/Bypass" component={LoginBypass} layout={LayoutDefault} />
           <AppRoute exact path="/mapBoard" component={mapBoard} layout={LayoutDefault} />
-          <AppRoute exact path="/EmployerReviews" component={EmployerReviews} layout={LayoutDefault} />
+          <AppRoute exact path="/EmployerRegister" component={Employer} layout={LayoutDefault} />
         </Switch>
       )} />
   );
