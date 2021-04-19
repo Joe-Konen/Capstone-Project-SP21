@@ -32,28 +32,6 @@ div.Register {
   }
 /*End of Registration Pages*/
 
-
-
-/*Review pages*/
-.flex{
-  display: flex;
-}
-
-.box{
-  width: 300px;
-  margin-left: 43%;
-}
-
-input[type="radio"]{
-  display: none;
-}
-.star{
-  cursor: pointer;
-  transition: color 200ms;
-}
-
-/*End of Review pages*/
-
 /*Job Posting Page*/
 
 div.Instructions {
@@ -61,5 +39,4 @@ div.Instructions {
   font-size: 17px;
   padding-bottom: 30px;
 }
-
 
