@@ -192,14 +192,13 @@ app.post("/Login", (req, res) => {
 app.get("/SjobBoard", (req,res)=>{
     //const address  = req.body.address;
     db.getConnection(function(err,connection){
-        db.query("SELECT address, employerID, latitude, longitude FROM Employer",
+        db.query("SELECT address, employerID FROM Employer",
             (err2,result)=>{
                 res.send(result)
                 if(err2) throw err2
             })
         })
 })
-
 
 app.get("/JobBoard", (req, res) => {
 
@@ -281,28 +280,22 @@ app.post("/employerRegister", (req, res) => {
     const empAddress = req.body.address;
     //const phone = req.body.phone;
     const empEmail = req.body.email;
-    const latitude = req.body.latitude;
-    const longitude = req.body.longitude;
     
     var values = [
-        [empFName, empLName, empAddress, empEmail, empPassword, empUsername, latitude, longitude]
+        [empFName, empLName, empAddress, empEmail, empPassword, empUsername]
     ];
     
-    console.log("The result: ",values[0]);
+    console.log(values[0]);
     
     db.query(
-        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username, latitude, longitude) VALUES (?)",
+        "INSERT INTO Employer (firstName, lastName, address, email, emp_password, emp_username) VALUES (?)",
         values,
-        function(err, rows, result){
+        function(err, rows, fields){
             if (err) throw err;
-            
         });
         
         res.send("registered")
 })
-
-
-
 
 app.post("/employerEdit", (req,res) => {
     const empUsername = req.body.username;
