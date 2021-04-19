@@ -33,6 +33,7 @@ div.Register {
 /*End of Registration Pages*/
 
 
+
 /*Review pages*/
 .flex{
   display: flex;
@@ -52,3 +53,13 @@ input[type="radio"]{
 }
 
 /*End of Review pages*/
+
+/*Job Posting Page*/
+
+div.Instructions {
+  text-align: center;
+  font-size: 17px;
+  padding-bottom: 30px;
+}
+
+

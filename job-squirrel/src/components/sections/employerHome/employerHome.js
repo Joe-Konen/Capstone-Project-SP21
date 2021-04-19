@@ -69,7 +69,7 @@ const FeaturesSplit = ({
                     <Button tag="a" color="primary" wideMobile href="employerProfile">
                     My Profile
                     </Button>
-                    <Button tag="a" color="primary" wideMobile href="EcurrPosted">
+                    <Button tag="a" color="primary" wideMobile href="myJobsPosted">
                     My Posted Jobs
                     </Button>
                     <Button tag="a" color="primary" wideMobile href="FAQ">
@@ -104,7 +104,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('../../../assets/images/features-split-image-01.png')}
+                  src={require('../../../assets/images/jobPost.png')}
                   alt="Features split 01"
                   width={528}
                   height={396} />
@@ -135,7 +135,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('../../../assets/images/features-split-image-02.png')}
+                  src={require('../../../assets/images/postedjobs.png')}
                   alt="Features split 02"
                   width={528}
                   height={396} />
@@ -151,8 +151,13 @@ const FeaturesSplit = ({
                 Your Reviews Are Important!
                   </h3>
                 <p className="m-0">
-                  After a job is completed, you can leave a review of how the student did. Be sure to be respectful and accurate as they can review you also. Feedback is important to providing the best possible experience here on JobSquirrel!
+                  Please take a mintue to complete our JobSquirrel Survey! Tell us what you think about the service and howe you think we could improve to better serve you! Click on the link below to access the survey. JobSquirrel thanks you for your feedback!
                   </p>
+                  <ButtonGroup>
+                  <Button tag="a" color="primary" wideMobile href="https://dh3kcwujsy3.typeform.com/to/Vev44fmU">
+                    Take Survey
+                    </Button>
+                  </ButtonGroup>
               </div>
               <div className={
                 classNames(
@@ -161,7 +166,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('../../../assets/images/features-split-image-03.png')}
+                  src={require('../../../assets/images/survey.png')}
                   alt="Features split 03"
                   width={528}
                   height={396} />

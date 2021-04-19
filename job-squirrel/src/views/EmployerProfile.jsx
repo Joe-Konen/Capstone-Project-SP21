@@ -119,8 +119,8 @@ const getData = () => {
                     setAddress(e.target.value);
                 }}
             />
-            <button className="backButton" onClick={routeChange}>Cancel</button>
-            <button onClick={employerRegister}>Confirm Edits</button>
+            <button className="button button-primary button-wide-mobile button-sm" onClick={routeChange}>Cancel</button>
+            <button className="button button-primary button-wide-mobile button-sm" onClick={employerRegister}>Confirm Edits</button>
         </div>
     </div>
     );
