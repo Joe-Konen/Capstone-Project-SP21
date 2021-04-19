@@ -1,24 +1,26 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./stylesheets/Style.css";
 import Axios from 'axios';
 import moment from 'moment';
 import ButtonGroup from "../components/elements/ButtonGroup";
 import Button from '../components/elements/Button';
 
+
 function EcurrPosted() {
   const [empID, setEmpID] = useState("")
   const [job, setJob] = useState([]);
 
   const getID = () => {
-  
+
     Axios.get('http://localhost:3001/employerID')
-    .then(function (response) {
+      .then(function (response) {
         const user = response.data
         console.log(user[0])
-        
+
         setEmpID(user[0]);
-    })
+      })
   }
+
 
   const getTable = (empID) => {
     Axios.get(`http://localhost:3001/employerJob/${empID}`)
@@ -26,7 +28,7 @@ function EcurrPosted() {
       setJob(response.data)
       console.log(response.data)
 
-    })
+      })
   }
 
   const deleteJob = (jobID) => {
@@ -44,13 +46,14 @@ function EcurrPosted() {
     getID();
     getTable(empID);
   }, [empID])
-  
+
   return (
     <div>
-      
-      <h3 style={{textAlign: 'center', padding: '40px'}}>Currently Open Job Postings for Employee ID: {empID}</h3>
+
+      <h3 style={{ textAlign: 'center', padding: '40px' }}>Currently Open Job Postings for Employee ID: {empID}</h3>
 
       <div>
+
         <table style={{width: '70%', margin: 'auto'}}>
           <thead style={{width: '70%'}}> 
             <tr>
@@ -97,8 +100,9 @@ function EcurrPosted() {
             Go Back
             </Button>
         </ButtonGroup>
+
       </div>
-      
+
     </div>
   );
 }

@@ -79,14 +79,14 @@ const Testimonial = ({
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
                   <p className="text-sm mb-0">
-                    — JobSquirrel allowed me to make money on the side during high school while still having time for homework and football. I was able to save up enough money using JobSquirrel to pay for my first year of College! 
+                    — Ahhhh yes JobSquirrel. This is a very estute application that runs very well on my weendows machine. I usually leave it run in the backaground and have no performance change. If you have questions, please. But if you dont! 
                       </p>
                 </div>
                 <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
-                  <span className="testimonial-item-name text-color-high">Jack Davis</span>
+                  <span className="testimonial-item-name text-color-high">Kotaka Wajjumba</span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">West Aurora High School</a>
+                    <a href="#0">Weendows</a>
                   </span>
                 </div>
               </div>

@@ -323,6 +323,7 @@ app.post("/employerEdit", (req,res) => {
         });
  
         res.send("editedEmployer")
+        //Window.alert("Edited Successfuly!")
 })
 
 app.post('/jobPosting', (req, res) => {

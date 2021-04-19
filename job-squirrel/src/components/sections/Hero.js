@@ -81,8 +81,8 @@ const Hero = ({
           </div>
           <div className="hero-figure reveal-from-bottom illustration-element-01" data-reveal-value="20px" data-reveal-delay="800">
             <a
-              data-video="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
-              href="#0"
+              src="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
+              href="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
               aria-controls="video-modal"
               onClick={openModal}
             >
@@ -98,7 +98,7 @@ const Hero = ({
             id="video-modal"
             show={videoModalActive}
             handleClose={closeModal}
-            video="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
+            src="https://www.youtube.com/watch?v=XKBwItDNrEU&t=59s"
             videoTag="iframe" />
         </div>
       </div>

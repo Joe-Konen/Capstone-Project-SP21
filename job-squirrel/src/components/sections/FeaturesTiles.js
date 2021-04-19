@@ -159,10 +159,10 @@ const FeaturesTiles = ({
                 </div>
                 <div className="features-tiles-item-content">
                   <h4 className="mt-0 mb-8">
-                    Ratings
+                    Maps
                     </h4>
                   <p className="m-0 text-sm">
-                    Ratings are provided for both students and employers! After a job is closed, you can leave a rating based on the experience
+                    Our new map feature allows you to find jobs posted in your local area and avoid areas you dont want to work in!
                     </p>
                 </div>
               </div>
@@ -181,10 +181,10 @@ const FeaturesTiles = ({
                 </div>
                 <div className="features-tiles-item-content">
                   <h4 className="mt-0 mb-8">
-                    Constructive Feedback
+                    Gain Connections
                     </h4>
                   <p className="m-0 text-sm">
-                    Alongside reviews, Feedback and Constructive criticism can be left for either party. We always encourace nice words and advice on how to improve!
+                    Build connections with local area homeowners and people that can help you in the future. A good work ethic goes a long way!
                     </p>
                 </div>
               </div>
