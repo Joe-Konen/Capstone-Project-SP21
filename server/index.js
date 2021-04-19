@@ -3,22 +3,17 @@ const mysql = require("mysql");
 const cors = require("cors");
 const app = express();
 
-//const bcrypt = require('bcrypt');
-//const saltRounds = 10;
-
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
 app.use(express.json());
 
-//app.use(cors());
-
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
 
@@ -399,17 +394,51 @@ app.get('/employerID', (req, res) => {
 
 })
 
-app.get("/employerJob", (req, res) => {
-
+app.get("/employerJob/:employerID", (req, res) => {
+    const empID = req.params.employerID;
     db.query(
         'SELECT * FROM Job WHERE employerID = ?',
         [empID], (err, result) => {
+            if(err) throw err;
             console.log(result)
             res.send(result)
         }
     )
 });
 
+app.get("/chosenJobs/:studentID", (req, res) => {
+    const stuID = req.params.studentID;
+    db.query(
+        'SELECT * FROM StudentToDoJobs WHERE studentID = ?', 
+        stuID, (err, result) => {
+            if(err) throw err;
+            console.log(result)
+            res.send(result)
+        }
+    )
+});
 
+app.delete("/delete/:jobID", (req, res) => {
+    const jobID = req.params.jobID;
+    console.log(jobID)
+    db.query(
+        'DELETE FROM Job WHERE jobID = ?', 
+        jobID, (err, result) => {
+            if(err) throw err;
+            res.send(result)
+        })
+})
+
+app.put("/updateJob/:jobID", (req, res) => {
+    const jobID = req.params.jobID;
+    console.log(jobID)
+    db.query(
+        'UPDATE Job SET status = 1 WHERE jobID = ?',
+        jobID, (err, result) => {
+            if(err) throw err;
+            res.send(result)
+        }
+    ) 
+})
 
 app.listen(3001);

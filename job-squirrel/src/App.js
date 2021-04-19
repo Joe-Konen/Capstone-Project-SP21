@@ -14,6 +14,7 @@ import Login from './views/Login';
 import HomeStudent from './views/HomeStudent';
 import HomeEmployer from './views/HomeEmployer';
 import SjobBoard from './views/SjobBoard';
+import SjobsToDo from './views/SjobsToDo';
 import StudentRegister from './views/StudentRegister';
 import EmployerRegister from './views/EmployerRegister';
 import StudentProfile from './views/StudentProfile';
@@ -66,6 +67,7 @@ const App = () => {
           <AppRoute exact path="/studentProfile" component={studentProfile} layout={LayoutDefault} />
           <AppRoute exact path="/HomeEmployer" component={HomeEmployer} layout={LayoutDefault} />
           <AppRoute exact path="/SjobBoard" component={SjobBoard} layout={LayoutDefault} />
+          <AppRoute exact path="/SjobsToDo" component={SjobsToDo} layout={LayoutDefault} />
           <AppRoute exact path="/EmployerRegister" component={EmployerRegister} layout={LayoutDefault} />
           <AppRoute exact path="/StudentProfile" component={StudentProfile} layout={LayoutDefault} />
           <AppRoute exact path="/employerProfile" component={employerProfile} layout={LayoutDefault} />
