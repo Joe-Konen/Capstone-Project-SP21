@@ -4,6 +4,7 @@ import Axios from 'axios';
 import moment from 'moment';
 import ButtonGroup from "../components/elements/ButtonGroup";
 import Button from '../components/elements/Button';
+import EmployerReview from "./EmployerReviews";
 
 
 function EcurrPosted() {
@@ -88,6 +89,13 @@ function EcurrPosted() {
                       </Button>
                     </ButtonGroup>
                   </td> 
+                  <td>
+                  <ButtonGroup>
+                      <Button tag="a" color="primary" wideMobile href="/EmployerReviews">
+                        Leave Feedback
+                      </Button>
+                    </ButtonGroup>
+                  </td>
                 </tr>
               ))}
             </tbody>

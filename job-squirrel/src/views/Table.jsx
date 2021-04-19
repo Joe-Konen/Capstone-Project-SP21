@@ -3,6 +3,8 @@ import moment from 'moment'
 import ButtonGroup from '../components/elements/ButtonGroup';
 import Button from '../components/elements/Button';
 import Axios from 'axios';
+import SjobsToDo from './SjobsToDo';
+import {useHistory} from "react-router-dom";
 
 function Table({ job }) {
     const [chooseJob, setChooseJob] = useState([]);
@@ -68,12 +70,15 @@ function Table({ job }) {
         })
     }
 
+
+    const history = useHistory();
     const studentToDo = () => {
         
         Axios.post("http://localhost:3001/insertJobs", chooseJob, {
         })
         .then((response) => {
             console.log("ResPONSE: ",response.data);
+            history.push("/SjobsToDo");
           });
         
     };

@@ -29,6 +29,7 @@ function EjobPost() {
             empID: empID,
         }).then((response) => {
             //console.log(response.data)
+            alert('Job Posted!')
         })
 
     }

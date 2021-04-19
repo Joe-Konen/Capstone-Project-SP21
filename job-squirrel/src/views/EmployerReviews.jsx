@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { FaStar } from "react-icons/fa";
 import "./stylesheets/Style.css";
+import ButtonGroup from "../components/elements/ButtonGroup";
+import Button from '../components/elements/Button';
 
 const EmployerReview = () => {
     const [rating1, setRating1] = useState(null);
@@ -62,6 +64,11 @@ const EmployerReview = () => {
         <div>
             <h3>Feel free to leave any additional comments below:</h3>
             <textarea style={{height:'200px', width:'70%'}}></textarea>
+            <ButtonGroup style={{display:'flex', justifyContent: 'center', alignItems: 'center', minHeight:'100px'}}>
+                    <Button tag="a" color="primary" wideMobile href="/HomeEmployer">
+                      Submit
+                    </Button>
+                  </ButtonGroup>
         </div>
     </div>
     )

@@ -4,6 +4,7 @@ import "./stylesheets/Style.css";
 import {useHistory} from "react-router-dom";
 
 var grabbedData = false;
+var loggedIn = false
 
 function EmployerProfile() {
   const [usernameEmp, setUsername] = useState("");
@@ -31,6 +32,24 @@ const getData = () => {
         })
     }
 }
+const userCheck = () => {
+    if(!loggedIn){
+        console.log("authenticating")
+        Axios.get('http://localhost:3001/checkAccess')
+        .then(function (res) {
+            if(res.data == "not logged in"){
+                history.push("/");
+            }
+            if(res.data == "logged in"){
+                loggedIn = true;
+                getData();
+            }
+        })
+      }
+  }
+
+  userCheck();
+
 
     const routeChange = () => {
         let path = 'HomeEmployer';

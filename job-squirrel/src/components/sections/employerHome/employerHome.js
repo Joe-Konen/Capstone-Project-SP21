@@ -72,9 +72,7 @@ const FeaturesSplit = ({
                     <Button tag="a" color="primary" wideMobile href="myJobsPosted">
                     My Posted Jobs
                     </Button>
-                    <Button tag="a" color="primary" wideMobile href="FAQ">
-                    Feedback
-                    </Button>
+                   
         </ButtonGroup>
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
@@ -123,7 +121,7 @@ const FeaturesSplit = ({
                    You can view the jobs that you currently have posted by clicking the button below or by navigating to the tab at the top. It is important to keep track of what you have posted and prevent posting double jobs. Unless it is marked as completed, a job will remain 'live'. 
                   </p>
                   <ButtonGroup>
-                  <Button tag="a" color="primary" wideMobile href="EcurrPosted">
+                  <Button tag="a" color="primary" wideMobile href="/myJobsPosted">
                     My Posted Jobs
                     </Button>
                   </ButtonGroup>

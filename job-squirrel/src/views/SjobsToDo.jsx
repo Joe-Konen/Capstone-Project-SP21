@@ -4,6 +4,7 @@ import Axios from 'axios';
 import moment from 'moment';
 import ButtonGroup from "../components/elements/ButtonGroup";
 import Button from '../components/elements/Button';
+import StudentsReview from "./StudentsReview";
 
 function SjobsToDo() {
   const [stuID, setStuID] = useState("")
@@ -33,7 +34,7 @@ function SjobsToDo() {
   const finishJob = (jobID) => {
     Axios.put(`http://localhost:3001/updateJob/${jobID}`)
     .then((response) => {
-      alert('updated job status')
+      alert('Updated Job Status! Great Work.')
       setJob(job.filter((val) => {
         return val.jobID != jobID
       }))
@@ -85,6 +86,13 @@ function SjobsToDo() {
                     </Button>
                   </ButtonGroup>
                 </td> 
+                <td>
+                <ButtonGroup>
+                    <Button tag="a" color="primary" wideMobile href="/StudentsReviews">
+                      Leave Feedback
+                    </Button>
+                  </ButtonGroup>
+                </td>
               </tr>
             ))}
           </tbody>

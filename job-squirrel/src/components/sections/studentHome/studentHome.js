@@ -74,9 +74,7 @@ const FeaturesSplit = ({
                     <Button tag="a" color="primary" wideMobile href="SjobsToDo">
                     My Jobs In Progress
                     </Button>
-                    <Button tag="a" color="primary" wideMobile href="FAQ">
-                    Feedback
-                    </Button>
+                    
         </ButtonGroup>
       </div>
       <div className="container">
