@@ -33,7 +33,7 @@ function RegisterStudent() {
       }).then((response) => {
         console.log(response);
         if(response.data == "registered"){
-            history.push("/HomeStudent");
+            history.push("/Login");
         };
       });
     }
