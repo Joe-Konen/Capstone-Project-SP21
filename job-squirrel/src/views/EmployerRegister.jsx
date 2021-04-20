@@ -40,7 +40,7 @@ function RegisterEmployer() {
             }).then((response2) => {
                 console.log(response2);
                 if(response2.data == "registered"){
-                history.push("/HomeEmployer");
+                history.push("/Login");
                 }
             })
         })
